@@ -1,13 +1,14 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
 
 urlpatterns = [
    
-    url('login/', views.login_user, name="login"),
-    url('', views.home, name="home"),
-    url('register/', views.register_user, name='register'),
-    url('landing/', views.landing, name='landing'),
-    url('logout/', views.logout_user, name='logout'),
+    path('login/', views.login_user, name="login"),
+    path('', views.home, name="home"),
+    path('register/', views.register_user, name='register'),
+    path('landing/', views.landing, name='landing'),
+    path('logout/', views.logout_user, name='logout'),
+
 
  ] 
