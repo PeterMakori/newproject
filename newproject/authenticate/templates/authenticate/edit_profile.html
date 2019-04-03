@@ -1,0 +1,43 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+
+<h1 class="text-center" style = "margin-top:45px">Edit Profile</h1>
+<div class="col-md-6 offset-md-3">
+	<form method="POST" action="{% url 'edit_profile' %}">
+		{% csrf_token %}
+		{% if form.errors %}
+
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <!-- <strong class="text-center" >Please Enter Valid Details.</strong> -->
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+				<!-- <p class="text-center text-danger"> Registration Failed!Please Enter Valid Details. </p> -->
+				{% for field in form %}
+					{% if field.errors %}
+					{% endif %}
+						{{ field.errors}}
+				{% endfor %}
+
+
+		</div>
+
+
+		{% endif %}
+
+		{{ form.as_p }}
+
+    <div class="form-group">
+       <label class="col-md-4 control-label" for="singlebutton"></label>
+       <div class="col-md-4 center-block">
+          <button id="singlebutton" name="singlebutton" class="btn btn-primary center-block">
+            Edit Profile
+           </button>
+       </div>
+    </div>
+
+	</form>
+		<p><small><a href="{% url 'change_password' %}">Click Here</a> To Change Your Password</small></p>
+		</div
+	  <br/><br/></br>
+{% endblock %}

@@ -1,21 +1,21 @@
 {% extends 'authenticate/base.html' %}
 {% block content %}
-<h1 class="text-center"><i>Please Login</i></h1> 
+<h1 class="text-center" style = "margin-top:45px">Please Login</h1>
 
-<div class="col-md-3 offset-md-4">
+<div class="col-md-4 offset-md-4">
 	<form method="POST">
 		{% csrf_token %}
 	  <div class="form-group">
-	    
+
 	    <input type="text" class="form-control" placeholder="Enter Username" name="username">
-	    
+
 	  </div>
 
 	  <div class="form-group">
-	   
+
 	    <input type="password" class="form-control" placeholder="Enter Password" name="password">
 	  </div>
-	  
+
 	  <button type="submit" class="btn btn-secondary">Login</button>
 	</form>
 </div>

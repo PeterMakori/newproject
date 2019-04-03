@@ -1,5 +1,4 @@
 
-
 {% extends 'authenticate/base.html' %}
 {% block content %}
 
@@ -8,7 +7,10 @@
 <button type="button" class="btn btn-success"> Success</button> -->
 
 {% if user.is_authenticated %}
-<h2 class="text-center" style = "margin-top:200px"> <b> Welcome {{ user.username }} </b></h2>
+<h2 class="text-center" style = "margin-top:100px">Your profile is:</h2>
+
+	<p class="text-center"> Name: {{ user.first_name }} {{ user.last_name }}</p>
+	<p class="text-center"> Email: {{ user.email }} </p>
 
 {% endif %}
 
