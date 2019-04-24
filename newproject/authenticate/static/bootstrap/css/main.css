@@ -1,0 +1,188 @@
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#microwrapper {
+
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+}
+
+#microwrapper.microtoggled {
+
+    margin-bottom: 1000px;
+}
+
+#wrapper.toggled {
+    padding-left: 208px;
+}
+
+#sidebar-wrapper {
+    z-index: -1;
+    position: fixed;
+    left: 250px;
+    top: 0px;
+    width: 0;
+    border-top: 3px solid #283593;
+    border-right: 3px solid #283593;
+    border-bottom: 3px solid #283593;
+    height: 95%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: DodgerBlue;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.items2 {
+
+
+    display: none;
+    text-decoration: none;
+    color: white;
+    font-family: Ubuntu;
+    letter-spacing: 3px;
+    font-size: 13px;
+    padding-left: 10px;
+    margin-top: 10px;
+    list-style: none;
+    text-decoration: none;
+    padding-bottom: 10px;
+    line-height: 50px;
+
+}
+
+
+
+
+.items2:hover {
+
+    text-decoration: none;
+    color: #f4f4f4;
+    border-bottom: 1px solid white;
+
+}
+
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 210px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: static;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: static;
+    margin-right: -200px;
+}
+
+
+/* Sidebar Styles */
+
+.sidebar-brand {
+
+    border-bottom: 1px solid white;
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding-left: 20px;
+}
+
+.sidebar-brand2 {
+
+    font-family: Ubuntu;
+    letter-spacing: 6px;
+    font-size: 11px;
+}
+
+
+#menu-toggle {
+
+    font-size: 26px;
+    color: white;
+
+}
+
+#caption {
+
+    text-align: right;
+    margin-top: -40px;
+    font-family: Ubuntu;
+}
+
+.sidebar-nav li a:hover {
+
+    text-decoration: none;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+
+    margin-top: 35px;
+    text-indent: 22px;
+    line-height: 28px;
+}
+
+.items {
+
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-family: Ubuntu;
+    letter-spacing: 4px;
+    font-size: 1.3em;
+    padding-left: 18px;
+
+}
+
+.items:hover {
+    text-decoration: none;
+    font-size: 12px;
+    color: powderblue;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.items2:focus,
+.items2:active
+ {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 24px;
+    line-height: 70px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: black;
+
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: white;
+    background: none;
+}
