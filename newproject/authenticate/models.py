@@ -1,3 +1,15 @@
-from django.db import models
-
+# from django.db import models
+# from django contrib.auth.forms import UserCreationForm
+# from django contrib.auth.models import User
+# from django import forms
+#
 # Create your models here.
+#
+# class MoreSignUp(UserCreationForm):
+#
+#     faculty = forms.CharField(max_length=100)
+#     department = forms.CharField(max_length=100)
+#
+#     class Meta:
+#         model = User
+#         fields = ('username','first_name','last_name','email','faculty','department','password1','password2', )

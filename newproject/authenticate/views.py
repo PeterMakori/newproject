@@ -9,6 +9,12 @@ from .forms import SignUpForm, EditProfileForm
 def home(request):
 	return render(request, 'authenticate/home.html', {})
 
+def about(request):
+	return render(request, 'authenticate/about.html', {})
+
+def contact(request):
+	return render(request, 'authenticate/contact.html', {})
+
 def login_user(request):
 	if request.method == 'POST':
 		username = request.POST['username']

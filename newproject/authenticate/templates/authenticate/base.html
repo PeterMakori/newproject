@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>tests</title>
-</head>
+	{% block title %}
+	<title></title>
+
+	{% endblock %}
+
 {% load static%}
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/mdb.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/style.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/sidenav.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{%  static 'bootstrap/css/login.css' %}">
+
+
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+<!-- Custom fonts for this template -->
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+
+<!-- Custom fonts for this template -->
+<!-- <link href="../../static/bootstrap/css/all.min.css" rel="stylesheet"> -->
+<!-- <link href="{% static 'bootstrap/css/landing_simple-line-icons.css' %}" rel="stylesheet" type="text/css"> -->
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+<!-- Custom styles for this template -->
+<link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
+
 
 {% comment %} <link rel="stylesheet" href="{%  static "bootstrap/css/main.css" %}"> {% endcomment %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/mdb.min.css' %}">
-<link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
-<link rel="stylesheet" href="{%  static "bootstrap/css/main.css" %}">
-<link rel="stylesheet" href="{%  static "bootstrap/css/boot.css" %}">
-<link rel="stylesheet" href="{%  static "bootstrap/css/login.css" %}">
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{%  static 'bootstrap/css/main.css' %}">
+
+
+
+
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -30,20 +52,14 @@
 		<a class="navbar-brand" href="{% url 'home' %}">Authentication App</a> -->
 
 
-
-  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color: black">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-        <!-- url as named in the view (url pattern)-->
-    <a class="navbar-brand" href="{% url 'home' %}"> <p class="text-dark">
-          E-Notice Board
-				</p>
-    </a>
-
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -54,8 +70,11 @@
 
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'home' %}">Home</a>
+						</li>
 
-							<li class="nav-item dropdown">
+							{% comment %} <li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">Some Stuffs</a>
 								<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
@@ -70,7 +89,7 @@
 							 </li>
 							 <li class="nav-item">
 								<a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
-							</li>
+							</li> {% endcomment %}
 
 							 <form class="form-inline my-2 my-lg-0 ml-auto">
 						    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -81,14 +100,28 @@
 						 </li>
 
 							 <li class="nav-item">
-								<a class="nav-link" href="{% url 'logout' %}"> <p class="text-dark">Logout</p></a>
+								<a class="nav-link" href="{% url 'logout' %}">Logout</a>
 							</li>
             {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}"> <p class="text-dark">Login </p></a>
-        </li>
+
 				<li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}"> <p class="text-dark"> Register </p></a>
+					<a class="nav-link" href="{% url 'home' %}">Home</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'about' %}">About</a>
+				</li>
+				<li class="nav-item">
+					 <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+
+				</li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+				<div id="vertical-line"></div>
+
+				<li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}"> Register </a>
         </li>
 
           {% endif %}
@@ -102,68 +135,73 @@
 	<!-- SideNav slide-out button -->
 	<!-- Sidebar -->
 
-			<div id="sidebar-wrapper">
-					<ul class="sidebar-nav">
-							<li class="sidebar-brand">
-									<a href="{% url 'landing' %}" class="sidebar-brand2">
-												E-Notice Board
-									</a>
-							</li>
+	<!-- Sidebar -->
 
-							<div id='microwrapper'>
-									<li>
-											<a href="#" class="items" id='project'>View Notices</a>
-									</li>
+		<div id="sidebar-wrapper">
+				<ul class="sidebar-nav">
+						<li class="sidebar-brand">
+								<a href="{% url 'landing' %}" class="sidebar-brand2">
+											E-Notice Board
+								</a>
+						</li>
 
-											<ul>
-													<div class='pushdown'>
+						<div id='microwrapper'>
+								<li>
+										<a href="#" class="items" id='project'>View Notices</a>
+								</li>
 
-													<a href="#" class="items2">Admin</a>
+										<ul>
+												<div class='pushdown'>
 
-													<div class='pushdown'>
+												<a href="#" class="items2">Admin</a>
 
-													<a href="#" class="items2">Faculty</a>
+												<div class='pushdown'>
 
-													</div>
+												<a href="#" class="items2">Faculty</a>
 
-													<div class='pushdown'>
+												</div>
 
-													<a href="#" class="items2">Department</a>
+												<div class='pushdown'>
 
-													</div>
+												<a href="#" class="items2">Department</a>
 
-													<div class='pushdown'>
+												</div>
 
-													<a href="#" class="items2">SUEU</a>
+												<div class='pushdown'>
 
-													</div>
+												<a href="#" class="items2">SUEU</a>
 
-													</div>
+												</div>
 
-											</ul>
+												</div>
 
-
-							<li>
-									<a href="{% url 'viewprof' %}" class="items">View Profile</a>
-							</li>
-							<li>
-									<a href="{% url 'edit_profile' %}" class="items">Edit Profile</a>
-							</li>
-							<li>
-									<a href="{% url 'logout' %}" class="items">Logout</a>
-							</li>
+										</ul>
 
 
+						<li>
+								<a href="{% url 'viewprof' %}" class="items">View Profile</a>
+						</li>
+						<li>
+								<a href="{% url 'edit_profile' %}" class="items">Edit Profile</a>
+						</li>
+						<li>
+								<a href="{% url 'logout' %}" class="items">Logout</a>
+						</li>
 
-						</div>
 
 
-					</ul>
-			</div>
+					</div>
+
+
+				</ul>
+		</div>
+
+
+
 
 <!--/. Sidebar navigation -->
 	{% endif %}
-	<br/><br/><br/><br/>
+	<br/><br/>
 
 
 	<div class="container">
@@ -189,45 +227,32 @@
 				</div>
 			{% endfor %}
 		{% endif %}
-
+</div>
 
 	{% block content %}
 
 	{% endblock %}
-</div>
+
+	 <footer class="page-footer font-small blue">
+
+	   <!-- Copyright -->
+	   <footer class="text-center footer-copyright py-1 navbar-dark white-text fixed-bottom" style="background-color: #808080">© 2019 Copyright:
+	     <a href="#"> E-NoticeBoard.com</a>
+	   </div>
+	   <!-- Copyright -->
+
+	 </footer>
+	 <!-- Footer -->
 
 
-<script type="text/javascript" src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/sidenavq.js' %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/popper.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/mdb.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/sidebar.js' %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/main.js' %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
-
-{% comment %} <script type="text/javascript" src="{%  static "bootstrap/js/main.js" %}"></script>
-<script type="text/javascript" src="{%  static "bootstrap/js/bootj.js" %}"></script>
-<script type="text/javascript" src="{%  static "bootstrap/js/login.js" %}"></script> {% endcomment %}
-
-	 <script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-	 <script type="text/javascript" src="{%  static "bootstrap/js/main.js" %}"></script>
-	 <script type="text/javascript" src="{%  static "bootstrap/js/bootj.js" %}"></script>
-	 <script type="text/javascript" src="{%  static "bootstrap/js/login.js" %}"></script>
-
+	 <script type="text/javascript" src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
+	 <script type="text/javascript" src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+	 <script type="text/javascript" src="{% static 'bootstrap/js/mdb.min.js' %}"></script>
+	 <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	 <script type="text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 </body>
 
-<footer class="page-footer font-small blue">
 
-  <!-- Copyright -->
-  <footer class="text-center footer-copyright py-1 navbar-dark white-text fixed-bottom" style="background-color: #808080">© 2018 Copyright:
-    <a href="#"> E-NoticeBoard.com</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
 
 </html>
