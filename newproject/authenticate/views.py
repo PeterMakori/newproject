@@ -14,6 +14,8 @@ def about(request):
 
 def contact(request):
 	return render(request, 'authenticate/contact.html', {})
+def feedback(request):
+	return render(request, 'authenticate/feedback.html', {})
 
 def login_user(request):
 	if request.method == 'POST':
@@ -63,7 +65,7 @@ def edit_profile(request):
 		if form.is_valid():
 			form.save()
 			messages.success(request, ('You Have Edited Your Profile.'))
-			return redirect('home')
+			return redirect('viewprof')
 	else:
 		form = EditProfileForm(instance=request.user)
 	context = {'form':form}

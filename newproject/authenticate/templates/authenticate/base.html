@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="{%  static 'bootstrap/css/login.css' %}">
 
 
+
 <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
 <!-- Custom fonts for this template -->
@@ -28,6 +29,7 @@
 
 <!-- Custom styles for this template -->
 <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{%  static 'css/form.css' %}">
 
 
 {% comment %} <link rel="stylesheet" href="{%  static "bootstrap/css/main.css" %}"> {% endcomment %}
@@ -35,6 +37,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/mdb.min.css' %}">
 <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{%  static 'bootstrap/css/main.css' %}">
+<link rel="stylesheet" href="{%  static 'bootstrap/css/sidebar.css' %}">
 
 
 
@@ -54,7 +57,8 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+	  {% if user.is_authenticated %}
+  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="margin-left: 250px;">
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,12 +68,24 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+		{% comment %} <div id="content">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="container-fluid">
+
+							<button type="button" id="sidebarCollapse" class="btn btn-info">
+								<i class="fa fa-align-left" aria-hidden="true"></i>
+
+							</button>
+
+					</div>
+			</nav>
+		</div> {% endcomment %}
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
+
 						<li class="nav-item">
 							<a class="nav-link" href="{% url 'home' %}">Home</a>
 						</li>
@@ -82,47 +98,88 @@
 									<a class="dropdown-item" href="#">Another action</a>
 									<a class="dropdown-item" href="#">Action3</a>
 								</div>
-							</li>
+							</li> {% endcomment %}
 
-								<li class="nav-item">
+								{% comment %} <li class="nav-item">
 								 <a class="nav-link" href="{% url 'viewprof' %}">View Profile</a>
 							 </li>
 							 <li class="nav-item">
 								<a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
 							</li> {% endcomment %}
+							<li class="nav-item">
+							 <a class="nav-link" href="{% url 'edit_profile' %}">Help?</a>
+						 </li>
+							{% comment %} <li class="nav-item">
+							 <a class="nav-link" href="{% url 'change_password' %}">Change Password</a>
+						 </li> {% endcomment %}
 
 							 <form class="form-inline my-2 my-lg-0 ml-auto">
 						    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
 						    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
 						  </form>
-							<li class="nav-item">
-							 <a class="nav-link" href="{% url 'change_password' %}">Change Password</a>
-						 </li>
 
 							 <li class="nav-item">
 								<a class="nav-link" href="{% url 'logout' %}">Logout</a>
 							</li>
             {% else %}
+						<nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="margin-left:-250px !important">
 
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'home' %}">Home</a>
-				</li>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+					    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+					    <span class="navbar-toggler-icon"></span>
+					  </button>
 
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'about' %}">About</a>
-				</li>
-				<li class="nav-item">
-					 <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+					    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					      <span class="navbar-toggler-icon"></span>
+					    </button>
 
-				</li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
-        </li>
-				<div id="vertical-line"></div>
 
-				<li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}"> Register </a>
-        </li>
+					  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+					        <ul class="navbar-nav ml-auto">
+
+											<li class="nav-item">
+												<a class="nav-link" href="{% url 'home' %}">Home</a>
+											</li>
+
+												{% comment %} <li class="nav-item dropdown">
+													<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+														aria-expanded="false">Some Stuffs</a>
+													<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+														<a class="dropdown-item" href="#">Action</a>
+														<a class="dropdown-item" href="#">Another action</a>
+														<a class="dropdown-item" href="#">Action3</a>
+													</div>
+												</li> {% endcomment %}
+
+													{% comment %} <li class="nav-item">
+													 <a class="nav-link" href="{% url 'viewprof' %}">View Profile</a>
+												 </li>
+												 <li class="nav-item">
+													<a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
+												</li> {% endcomment %}
+
+												{% comment %} <li class="nav-item">
+												 <a class="nav-link" href="{% url 'change_password' %}">Change Password</a>
+											 </li> {% endcomment %}
+
+
+
+										<li class="nav-item">
+											<a class="nav-link" href="{% url 'about' %}">About</a>
+										</li>
+										<li class="nav-item">
+											 <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+
+										</li>
+						        <li class="nav-item">
+						          <a class="nav-link" href="{% url 'login' %}">Login</a>
+						        </li>
+										<div id="vertical-line"></div>
+
+										<li class="nav-item">
+						          <a class="nav-link" href="{% url 'register' %}"> Register </a>
+						        </li>
 
           {% endif %}
       </ul>
@@ -137,71 +194,68 @@
 
 	<!-- Sidebar -->
 
-		<div id="sidebar-wrapper">
-				<ul class="sidebar-nav">
-						<li class="sidebar-brand">
-								<a href="{% url 'landing' %}" class="sidebar-brand2">
-											E-Notice Board
-								</a>
-						</li>
+	<div class="wrapper">
+	<!-- Sidebar -->
+	<nav id="sidebar">
+			{% comment %} <div class="sidebar-header">
+					<h3>Bootstrap Sidebar</h3>
+			</div> {% endcomment %}
 
-						<div id='microwrapper'>
-								<li>
-										<a href="#" class="items" id='project'>View Notices</a>
-								</li>
+			<ul class="list-unstyled components">
+					<p>E-NoticeBoard</p>
+					<li class="active">
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Notice</a>
+							<ul class="collapse list-unstyled" id="homeSubmenu">
+									<li>
+											<a href="#">Administration</a>
+									</li>
+									<li>
+											<a href="#">Faculty</a>
+									</li>
+									<li>
+											<a href="#">Department</a>
+									</li>
+									<li>
+											<a href="#">Accommodation</a>
+									</li>
+							</ul>
+					</li>
+					<li>
+							<a href="{% url 'feedback' %}">Give Feedback</a>
+					</li>
+					<li>
+							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Profile</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu">
+									<li>
+											<a href="{% url 'viewprof' %}">View</a>
+									</li>
+									<li>
+											<a href="{% url 'edit_profile' %}">Edit</a>
+									</li>
+									<li>
+											<a href="{% url 'change_password' %}">Change Password</a>
+									</li>
+							</ul>
+					</li>
+					<li>
+							<a href="#">Search Notice</a>
+					</li>
+					<li>
+							<a href="#">Contact</a>
+					</li>
+			</ul>
+	</nav>
 
-										<ul>
-												<div class='pushdown'>
-
-												<a href="#" class="items2">Admin</a>
-
-												<div class='pushdown'>
-
-												<a href="#" class="items2">Faculty</a>
-
-												</div>
-
-												<div class='pushdown'>
-
-												<a href="#" class="items2">Department</a>
-
-												</div>
-
-												<div class='pushdown'>
-
-												<a href="#" class="items2">SUEU</a>
-
-												</div>
-
-												</div>
-
-										</ul>
-
-
-						<li>
-								<a href="{% url 'viewprof' %}" class="items">View Profile</a>
-						</li>
-						<li>
-								<a href="{% url 'edit_profile' %}" class="items">Edit Profile</a>
-						</li>
-						<li>
-								<a href="{% url 'logout' %}" class="items">Logout</a>
-						</li>
-
-
-
-					</div>
-
-
-				</ul>
-		</div>
+</div>
 
 
 
 
 <!--/. Sidebar navigation -->
+
+
 	{% endif %}
-	<br/><br/>
+	<br/><br/><br/>
 
 
 	<div class="container">
@@ -249,7 +303,22 @@
 	 <script type="text/javascript" src="{% static 'bootstrap/js/popper.min.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'bootstrap/js/mdb.min.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	 <script type="text/javascript" src="{% static 'bootstrap/js/form.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+	 <script type="text/javascript">
+
+
+$(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+
+});
+
+</script>
+
 
 </body>
 

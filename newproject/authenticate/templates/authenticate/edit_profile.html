@@ -1,8 +1,14 @@
 {% extends 'authenticate/base.html' %}
+
+{% block title %}
+<title>Edit Profile</title>
+
+{% endblock %}
+
 {% block content %}
 
 <h1 class="text-center" style = "margin-top:45px">Edit Profile</h1>
-<div class="col-md-6 offset-md-3">
+<div class="col-md-6 offset-md-4">
 	<form method="POST" action="{% url 'edit_profile' %}">
 		{% csrf_token %}
 		{% if form.errors %}
@@ -29,9 +35,9 @@
 
     <div class="form-group">
        <label class="col-md-4 control-label" for="singlebutton"></label>
-       <div class="col-md-4 center-block">
+       <div class="col-md-5 center-block">
           <button id="singlebutton" name="singlebutton" class="btn btn-primary center-block">
-            Edit Profile
+            Save
            </button>
        </div>
     </div>
