@@ -1,14 +1,14 @@
 {% extends 'authenticate/base.html' %}
 
 {% block title %}
-<title>Edit Profile</title>
+<title>E-NoticeBoard</title>
 
 {% endblock %}
 
 {% block content %}
 
 <h1 class="text-center" style = "margin-top:45px">Edit Profile</h1>
-<div class="col-md-6 offset-md-4">
+<div class="col-md-4 offset-md-5">
 	<form method="POST" action="{% url 'edit_profile' %}">
 		{% csrf_token %}
 		{% if form.errors %}

@@ -1,4 +1,10 @@
 {% extends 'authenticate/base.html' %}
+
+{% block title %}
+<title>E-NoticeBoard</title>
+
+{% endblock %}
+
 {% block content %}
 
 
@@ -13,7 +19,7 @@
             </span>
 
             <div class="wrap-input100 validate-input m-b-16">
-              <input class="input100" type="text" name="username" placeholder="Username" required>
+              <input class="input100" type="text" name="username" placeholder="Registration No."  max_length="15"  required>
               <span class="focus-input100"></span>
             </div>
 
@@ -44,7 +50,7 @@
                 Don’t have an account?
               </span>
 
-              <a href="{% url 'register' %}" class="txt3">
+              <a href="{% url 'signup' %}" class="txt3">
                 Register
               </a>
             </div>

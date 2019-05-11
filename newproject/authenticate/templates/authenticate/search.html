@@ -1,0 +1,57 @@
+{% extends 'authenticate/base.html' %}
+
+
+<!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
+
+{% block title %}
+<title>E-NoticeBoard</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+<div style="margin-left:500px;">
+    <br>
+    <form action="{% url 'search' %}" method="get">
+        <input type="text" id= "from1" name="from" placeholder="From" autocomplete="off" readonly="readonly">
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+
+
+                $("#from1").datepicker({
+                    numberOfMonth:1,
+                    format: 'yyyy/mm/dd',
+                    todayHighlight:true,
+                    autoclose:true,
+
+                });
+
+            })
+        </script>
+        <input type="text"  name="to" placeholder="To" id="to1" autocomplete="off" readonly="readonly">
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+
+
+                $("#to1").datepicker({
+                    numberOfMonth:1,
+                    format: 'yyyy/mm/dd',
+                    todayHighlight:true,
+                    autoclose:true,
+
+                });
+
+            })
+        </script>
+
+
+    <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+
+    </form>
+    </div>
+
+{% endblock content%}

@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+	#id_first_name{
+		margin-bottom: 14px;
+		margin-top: 14px;
+	}
+	#id_last_name{
+			margin-bottom: 14px;
+	}
+	#id_email{
+			margin-bottom: 14px;
+	}
+	#id_faculty{
+			margin-bottom: 14px;
+	}
+	#id_department{
+			margin-bottom: 14px;
+	}
+	#id_password1{
+			margin-bottom: 14px;
+	}
+	#id_password2{
+			margin-top: 14px;
+	}
+	</style>
 	{% block title %}
 	<title></title>
 
 	{% endblock %}
 
 {% load static%}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/mdb.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/style.min.css' %}">
@@ -25,7 +52,6 @@
 <!-- Custom fonts for this template -->
 <!-- <link href="../../static/bootstrap/css/all.min.css" rel="stylesheet"> -->
 <!-- <link href="{% static 'bootstrap/css/landing_simple-line-icons.css' %}" rel="stylesheet" type="text/css"> -->
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 <!-- Custom styles for this template -->
 <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
@@ -38,12 +64,11 @@
 <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{%  static 'bootstrap/css/main.css' %}">
 <link rel="stylesheet" href="{%  static 'bootstrap/css/sidebar.css' %}">
+<link rel="stylesheet" href="{%  static 'bootstrap/css/datepicker.css' %}">
 
 
 
 
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -54,138 +79,70 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="{% url 'home' %}">Authentication App</a> -->
 
-
+<style>
+	.nactive{
+		margin-left: 250px;
+	}
+</style>
 </head>
 <body>
-	  {% if user.is_authenticated %}
-  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="margin-left: 250px;">
+			{% if user.is_authenticated %}
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+								<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary nactive" id="navmenu">
+									<button type="button" id="sidebarCollapse" class="btn btn-info" style="margin-left: -16px;">
+										<i class="fa fa-align-justify"></i>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-		{% comment %} <div id="content">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<div class="container-fluid">
-
-							<button type="button" id="sidebarCollapse" class="btn btn-info">
-								<i class="fa fa-align-left" aria-hidden="true"></i>
-
-							</button>
-
-					</div>
-			</nav>
-		</div> {% endcomment %}
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav ml-auto">
-
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'home' %}">Home</a>
-						</li>
-
-							{% comment %} <li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false">Some Stuffs</a>
-								<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" href="#">Action</a>
-									<a class="dropdown-item" href="#">Another action</a>
-									<a class="dropdown-item" href="#">Action3</a>
-								</div>
-							</li> {% endcomment %}
-
-								{% comment %} <li class="nav-item">
-								 <a class="nav-link" href="{% url 'viewprof' %}">View Profile</a>
-							 </li>
-							 <li class="nav-item">
-								<a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
-							</li> {% endcomment %}
-							<li class="nav-item">
-							 <a class="nav-link" href="{% url 'edit_profile' %}">Help?</a>
-						 </li>
-							{% comment %} <li class="nav-item">
-							 <a class="nav-link" href="{% url 'change_password' %}">Change Password</a>
-						 </li> {% endcomment %}
-
-							 <form class="form-inline my-2 my-lg-0 ml-auto">
-						    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-						    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
-						  </form>
-
-							 <li class="nav-item">
-								<a class="nav-link" href="{% url 'logout' %}">Logout</a>
-							</li>
-            {% else %}
-						<nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="margin-left:-250px !important">
-
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-					    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+									</button>
+					  <a class="navbar-brand" href="{% url 'home' %}">E-NoticeBoard Portal</a>
+					  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					    <span class="navbar-toggler-icon"></span>
 					  </button>
 
-					    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					      <span class="navbar-toggler-icon"></span>
-					    </button>
-
 
 					  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-					        <ul class="navbar-nav ml-auto">
-
-											<li class="nav-item">
-												<a class="nav-link" href="{% url 'home' %}">Home</a>
-											</li>
-
-												{% comment %} <li class="nav-item dropdown">
-													<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">Some Stuffs</a>
-													<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-														<a class="dropdown-item" href="#">Action</a>
-														<a class="dropdown-item" href="#">Another action</a>
-														<a class="dropdown-item" href="#">Action3</a>
-													</div>
-												</li> {% endcomment %}
-
-													{% comment %} <li class="nav-item">
-													 <a class="nav-link" href="{% url 'viewprof' %}">View Profile</a>
-												 </li>
-												 <li class="nav-item">
-													<a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
-												</li> {% endcomment %}
-
-												{% comment %} <li class="nav-item">
-												 <a class="nav-link" href="{% url 'change_password' %}">Change Password</a>
-											 </li> {% endcomment %}
+					    <ul class="navbar-nav ml-auto">
+					      {% comment %} <li class="nav-item active">
+					      <b>  <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></b>
+					      </li> {% endcomment %}
+					      <li class="nav-item">
+					        <a class="nav-link" href="{% url 'logout' %}"> <b> Logout </b></a>
+					      </li>
 
 
+			 {% else %}
 
-										<li class="nav-item">
-											<a class="nav-link" href="{% url 'about' %}">About</a>
-										</li>
-										<li class="nav-item">
-											 <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+											 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary">
+									 <a class="navbar-brand" href="#">E-NoticeBoard Portal</a>
+									 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+										 <span class="navbar-toggler-icon"></span>
+									 </button>
 
-										</li>
-						        <li class="nav-item">
-						          <a class="nav-link" href="{% url 'login' %}">Login</a>
-						        </li>
-										<div id="vertical-line"></div>
+									 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+										 <ul class="navbar-nav ml-auto">
+											 <li class="nav-item active">
+												 <a class="nav-link" href="{% url 'home' %}"> <b>Home </b> <span class="sr-only">(current)</span></a>
 
-										<li class="nav-item">
-						          <a class="nav-link" href="{% url 'register' %}"> Register </a>
-						        </li>
 
-          {% endif %}
-      </ul>
+													<li class="nav-item">
+										        <a class="nav-link" href="{% url 'login' %}"> <b>Login </b></a>
+										      </li>
+													<li class="nav-item">
+										        <a class="nav-link" href="{% url 'signupstudent' %}"> <b> Register </b></a>
+										      </li>
+										    </ul>
 
-    </div>
-  </nav>
+
+			<!--/.Navbar-->
+
+
+			{% endif %}
+
+</div>
+</nav>
+
+
+
+
 
 
 	{% if user.is_authenticated %}
@@ -202,7 +159,7 @@
 			</div> {% endcomment %}
 
 			<ul class="list-unstyled components">
-					<p>E-NoticeBoard</p>
+					<p> <b>E-NoticeBoard Portal</b> </p> <br/>
 					<li class="active">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Notice</a>
 							<ul class="collapse list-unstyled" id="homeSubmenu">
@@ -221,6 +178,9 @@
 							</ul>
 					</li>
 					<li>
+							<a href="{% url 'search' %}">Search Notices</a>
+					</li>
+					<li>
 							<a href="{% url 'feedback' %}">Give Feedback</a>
 					</li>
 					<li>
@@ -237,9 +197,7 @@
 									</li>
 							</ul>
 					</li>
-					<li>
-							<a href="#">Search Notice</a>
-					</li>
+
 					<li>
 							<a href="#">Contact</a>
 					</li>
@@ -249,19 +207,32 @@
 </div>
 
 
-
+<br/><br/><br/>
 
 <!--/. Sidebar navigation -->
 
+{% comment %}
+<div id="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+
+        </div>
+    </nav>
+</div> {% endcomment %}
+
 
 	{% endif %}
-	<br/><br/><br/>
 
 
-	<div class="container">
+	<div class="container" style="width:700px;">
 		{% if messages %}
 			{% for message in messages %}
-				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
 					<button class="close" data-dismiss="alert">
 				<!--  <span aria-hidden="true">&times;</span>  -->
 						<small><sup>x</sup></small>
@@ -299,6 +270,10 @@
 	 <!-- Footer -->
 
 
+
+	 {% comment %} <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> {% endcomment %}
+
 	 <script type="text/javascript" src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'bootstrap/js/popper.min.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'bootstrap/js/mdb.min.js' %}"></script>
@@ -306,18 +281,49 @@
 	 <script type="text/javascript" src="{% static 'bootstrap/js/form.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-	 <script type="text/javascript">
+	 <link rel="stylesheet" href="/resources/demos/style.css">
+{% comment %} <script src="https://code.jquery.com/jquery-1.12.4.js"></script> {% endcomment %}
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+					 <script type="text/javascript">
 
 
-$(document).ready(function () {
+				$(document).ready(function () {
 
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
+				    $('#sidebarCollapse').on('click', function () {
+				        $('#sidebar').toggleClass('active');
+								$('#navmenu').toggleClass('nactive');
 
-});
+				    });
 
-</script>
+				});
+
+				</script>
+
+								<script>
+								$( function() {
+									$( "#from1" ).datepicker({
+
+											dateFormat: "yy/mm/dd",
+											maxDate: 0,
+
+									});
+								} );
+								</script>
+
+								<script>
+								$( function() {
+									$( "#to1" ).datepicker({
+
+											dateFormat: "yy/mm/dd",
+											maxDate: 0,
+
+
+									});
+								} );
+								</script>
+
 
 
 </body>

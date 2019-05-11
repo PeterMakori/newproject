@@ -1,0 +1,48 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+
+<h1 class="text-center" style = "margin-top:45px">Please Register</h1>
+<div class="col-md-4 offset-md-4">
+	<form method="POST">
+		{% csrf_token %}
+		{% if form.errors %}
+
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <!-- <strong class="text-center" >Please Enter Valid Details.</strong> -->
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+				<p class="text-center text-danger"> Registration Failed!</p>
+				{% for field in form %}
+					{% if field.errors %}
+					{% endif %}
+						{{ field.errors}}
+				{% endfor %}
+
+
+		</div>
+
+
+		{% endif %}
+
+		{{ form.as_p }}
+
+		<div class="form-group">
+		   <label class="col-md-4 control-label" for="singlebutton"></label>
+		   <div class="col-md-6 center-block">
+		      <button id="singlebutton" name="singlebutton" class="btn btn-primary center-block">
+		        Register
+		       </button>
+
+		   </div>
+			  <p> Have an account? <a href="{% url 'login' %}"> <i>Log in</i></a></p>
+		</div>
+
+
+
+<!-- <button type="submit" class="btn btn-secondary">Register</button> -->
+	</form>
+
+	</div>
+	<br/><br/>
+{% endblock %}

@@ -4,14 +4,14 @@
 <!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
 
 {% block title %}
-<title>Landing Page</title>
+<title>E-NoticeBoard</title>
 
 {% endblock %}
 
 {% block content %}
 
 {% if user.is_authenticated %}
-<h2 class="text-center" style = "margin-top:200px"> <b> Welcome {{ user.username }} </b></h2>
+<h3 class="text-center" style = "margin-top:200px"> <b> Welcome {{ user.first_name }} {{ user.last_name }} </b></h3>
 
 {% else %}
 
@@ -99,7 +99,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto">
-            <h2 class="mb-4">Ready to get started? <a href="{% url 'register' %}"><h2>Sign up now!</h2></a></h2>
+            <h2 class="mb-4">Ready to get started? <a href="#"><h2>Sign up now!</h2></a></h2>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form>

@@ -3,7 +3,7 @@
 
 
 {% block title %}
-<title>Feedback</title>
+<title>E-NoticeBoard</title>
 
 {% endblock %}
 
@@ -14,23 +14,25 @@
 
        <div id="form-main">
            <div id="form-div">
-               <form class="montform" id="reused_form" >
+
+               <form class="montform" method="POST" action="{% url 'feedback' %}" id="reused_form" >
+                 {%csrf_token %}
                    <p class="name">
-                       <select name="name" type="text" class="feedback-input" required placeholder="Type" id="name" >
+                       <select name="type" type="text" class="feedback-input" required placeholder="Type" id="name" >
 
 
-                     <option value="volvo">Suggestion</option>
-                     <option value="saab">Comment</option>
-                     <option value="opel">Query</option>
+                     <option value="Suggestion">Suggestion</option>
+                     <option value="Comment">Comment</option>
+                     <option value="Query">Query</option>
                    </select>
                   </p>
 
 
                    <p class="email">
-                       <input name="email" type="subject" required class="feedback-input" id="email" placeholder="Subject" />
+                       <input name="subject" type="subject" required class="feedback-input" id="email" placeholder="Subject" />
                    </p>
                    <p class="text">
-                       <textarea name="message" class="feedback-input" id="comment" placeholder="Message"></textarea>
+                       <textarea name="message" required class="feedback-input" id="comment" placeholder="Message"></textarea>
                    </p>
                    <div class="submit">
                        <button type="submit" class="button-blue">SUBMIT</button>
@@ -43,7 +45,7 @@
                    </h4>
                    Sorry there was an error sending your form.
                </div> -->
-               <div id="success_message" style="width:100%; height:100%; display:none; "> <h2>Success! Your Message was Sent Successfully.</h2> </div>
+
            </div>
        </div>
    </div>
