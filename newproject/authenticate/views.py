@@ -20,6 +20,18 @@ def about(request):
 def contact(request):
 	return render(request, 'authenticate/contact.html', {})
 
+def admin_notice(request):
+	return render(request, 'authenticate/adminnotice.html', {})
+
+def faculty_notice(request):
+	return render(request, 'authenticate/facultynotice.html', {})
+
+def department_notice(request):
+	return render(request, 'authenticate/departmentnotice.html', {})
+
+def accommodation_notice(request):
+	return render(request, 'authenticate/accommodationnotice.html', {})
+
 def feedback(request):
 	form = SendFeedbackForm;
 	if request.method == 'POST':

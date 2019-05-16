@@ -20,6 +20,10 @@ urlpatterns = [
     path('signup/', views.Signup, name="signup"),
     path('signup/student', StdentSignUp.as_view(), name="signupstudent"),
     path('signup/staff', StaffSign.as_view(), name="signupstaff"),
+    path('adminnotice/', views.admin_notice, name="adminnotice"),
+    path('facultynotice/', views.faculty_notice, name="facultynotice"),
+    path('departmentnotice/', views.department_notice, name="departmentnotice"),
+    path('accommodationnotice/', views.accommodation_notice, name="accommodationnotice"),
 
 
  ]

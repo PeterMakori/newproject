@@ -1,12 +1,13 @@
 {% extends 'authenticate/base.html' %}
 
+<!-- {% load crispy_forms_tags %} -->
+
 {% block title %}
 <title>E-NoticeBoard</title>
 
 {% endblock %}
 
 {% block content %}
-
 
 	<form method="POST">
 		{% csrf_token %}
@@ -63,5 +64,7 @@
 
 
 	</br> </br></br>
+
+
 
 {% endblock %}
