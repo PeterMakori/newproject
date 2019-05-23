@@ -9,6 +9,22 @@
 
 {% block content %}
 
+<div class="container" style="width:700px;">
+  {% if messages %}
+    {% for loginmsg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <button class="close" data-dismiss="alert">
+      <!--  <span aria-hidden="true">&times;</span>  -->
+          <small><sup>x</sup></small>
+
+        </button>
+
+        {{ loginmsg }}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
 	<form method="POST">
 		{% csrf_token %}
     <div class="limiter">
@@ -16,11 +32,11 @@
         <div class="wrap-login100">
           <div class="login100-form validate-form p-l-55 p-r-55 p-t-178">
             <span class="login100-form-title">
-              Student Log in
+              User Log in
             </span>
 
             <div class="wrap-input100 validate-input m-b-16">
-              <input class="input100" type="text" name="username" placeholder="Registration No."  max_length="15"  required>
+              <input class="input100" type="text" name="username" placeholder="Username"  max_length="15"  required>
               <span class="focus-input100"></span>
             </div>
 
@@ -46,14 +62,14 @@
             </div>
 
               	<!-- Register -->
-            <div class="flex-col-c p-t-170 p-b-40">
-              <span class="txt1 p-b-9">
+            <div class="flex-col-c p-t-90 p-b-0">
+              <!-- <span class="txt1 p-b-9">
                 Don’t have an account?
-              </span>
+              </span> -->
 
-              <a href="{% url 'signup' %}" class="txt3">
+              <!-- <a href="{% url 'signupstudent' %}" class="txt3">
                 Register
-              </a>
+              </a> -->
             </div>
           </div>
         </div>

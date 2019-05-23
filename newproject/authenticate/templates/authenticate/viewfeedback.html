@@ -24,25 +24,28 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Topic</th>
-          <th>Posted on</th>
-          <th>Due date</th>
-          <th>Details</th>
-          <th>Notice level</th>
+          <th>Type</th>
+          <th>Subject</th>
+          <th>Sent On</th>
+          <th> Message</th>
         </tr>
       </thead>
       <tbody>
-
-        {% for notice in notices %}
-        {% if notice.posted_by.faculty == user.faculty or notice.posted_by.department  == user.department %}
+        {% if list1 %}
+          {% for feedback in list1 %}
+            <span>{{list1}}</span>
+          {% endfor %}
+        {% endif %}
+        {% for feedback in list1 %}
+        <!-- {% if feedback.sent_by.user == user.faculty or feedback.sent_by.user == user.department %} -->
 
           <tr>
-            <td>{{ notice.topic }}</td>
-            <td>{{ notice.created_on }}</td>
-            <td> {{ notice.due_date }}</td>
-            <td>{{ notice.notice }}</td>
+            <td>{{ feedback.type }}</td>
+            <td>{{ feedback.subject }}</td>
+            <td> {{ feedback.sent_on }}</td>
+            <td>{{ feedback.message }}</td>
 
-              <td>{{ notice.posted_by.faculty }},{{notice.posted_by.department }}</td>
+              <!-- <td>{{ notice.posted_by.faculty }},{{notice.posted_by.department }}</td> -->
 
 
             <td><a href="{% url 'read_notice_details' notice.id%}" class="btn btn-primary btn-sm">Read Details</a></td>

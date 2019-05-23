@@ -1,0 +1,70 @@
+
+{% extends 'authenticate/base.html' %}
+
+
+<!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
+
+{% block title %}
+<title>E-NoticeBoard</title>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container" style="width:700px;">
+
+</div>
+<div class="row">
+  <div class="col col-md-4 offset-md-4">
+
+    <div class="row">
+
+       <div class="card">
+
+           <!-- <h5 class="h5  mt-4 card-header">Topic</h5>
+           <p class="text-left grey-text mb-3">{{ notice.type }}</p>
+
+
+
+           <h5 class="h5">Posted on</h5>
+           <p class="text-center grey-text mb-3">{{ notice.created_on }}</p>
+
+           <h5 class="h5">Valid before</h5>
+           <p class="text-left grey-text mb-3">{{ notice.due_date }}</p>
+
+           <h5 class="h5">Details</h5>
+           <p class="text-left grey-text mb-3">{{ notice.notice }}</p>
+
+            <p class="text-left grey-text mb-3"><i>{{ notice.posted_by }}</i></p> -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Posted on</th>
+                  <th>Due date</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>{{ notice.topic }}</td>
+                    <td>{{ notice.created_on }}</td>
+                    <td> {{ notice.due_date }}</td>
+                    <td>{{ notice.notice }}</td>
+
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+         </div>
+
+  </div>
+
+</div>
+
+
+
+{% endblock content%}

@@ -1,13 +1,14 @@
 from django.urls import path
 from . import views
-from authenticate.views import StdentSignUp, StaffSign
+from authenticate.views import *
+from django.conf.urls import url
 
 
 urlpatterns = [
 
     path('login/', views.login_user, name="login"),
     path('', views.home, name="home"),
-    # path('register/', views.register_user, name='register'),
+    path('register/', views.register_user, name='register'),
     path('landing/', views.landing, name='landing'),
     path('logout/', views.logout_user, name='logout'),
     path('viewprof/', views.view_prof, name='viewprof'),
@@ -24,6 +25,12 @@ urlpatterns = [
     path('facultynotice/', views.faculty_notice, name="facultynotice"),
     path('departmentnotice/', views.department_notice, name="departmentnotice"),
     path('accommodationnotice/', views.accommodation_notice, name="accommodationnotice"),
+    path('createnotice/', views.notice, name="createnotice"),
+    # path('viewFeedback/', views.viewFeedback, name="viewfeedback"),
+    url(r'^notices/', ViewNotice.as_view(), name="view_notices"),
+    url(r'^notice/view/(?P<pk>[0-9]+)/$', NoticeDetails.as_view(), name="read_notice_details"),
+    url(r'^feedbacks/', viewFeedback.as_view(), name="viewfeedback"),
+    url(r'^feedback/view/(?P<pk>[0-9]+)/$', FeedbackDetails.as_view(), name="read_feedback_details"),
 
 
  ]

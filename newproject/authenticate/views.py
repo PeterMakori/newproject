@@ -2,9 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages
-from .forms import SignUpForm, EditProfileForm, SendFeedbackForm, StaffSignUp
-from django.views.generic import CreateView
-from authenticate.models import User
+from .forms import SignUpForm, EditProfileForm, SendFeedbackForm, StaffSignUp,NoticeForm
+from django.contrib.auth.decorators import login_required
+from authenticate.decorators import staff_required,student_required
+from django.views.generic import CreateView,TemplateView,ListView,DetailView
+from authenticate.models import User,Notices,SendFeedback
+from django.utils.decorators import method_decorator
+from datetime import date
+
 
 # Create your views here.
 
@@ -32,23 +37,8 @@ def department_notice(request):
 def accommodation_notice(request):
 	return render(request, 'authenticate/accommodationnotice.html', {})
 
-def feedback(request):
-	form = SendFeedbackForm;
-	if request.method == 'POST':
-		type = request.POST['type']
-		subject = request.POST['subject']
-		message = request.POST['message']
-
-		form = SendFeedbackForm(request.POST or None)
-		if form.is_valid():
-			form.save()
-			messages.success(request, ('Feedback Submitted Successfully.'))
-			return redirect('home')
-
-	else:
-		context = {'form':form}
-		return render(request, 'authenticate/feedback.html', context)
-
+@login_required
+@student_required
 def search(request):
 	return render(request, 'authenticate/search.html', {})
 
@@ -60,33 +50,37 @@ def login_user(request):
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
 			login(request, user)
-			messages.success(request, ('You Have Been Logged In!'))
+			# messages.success(request, ('You Have Been Logged In!'))
 			return redirect('home')
 		else:
-			messages.success(request, ('Registration Number or Password Wrong. Please Try Again!'))
+			messages.success(request, ('Username or Password Wrong. Please Try Again!'))
 			return redirect('login')
 
 	else:
 		return render(request, 'authenticate/login.html', {})
 
 
-# def register_user(request):
-# 	if request.method == 'POST':
-# 		form = SignUpForm(request.POST)
-# 		if form.is_valid():
-# 			form.save()
-# 			username = form.cleaned_data['username']
-# 			password = form.cleaned_data['password1']
-# 			user = authenticate(username=username,password=password)
-# 			login(request,user)
-# 			messages.success(request, ('Registration Successful!'))
-# 			return redirect('home')
-# 	else:
-# 		form = SignUpForm()
-# 	context = {'form':form}
-# 	return render(request, 'authenticate/register.html', context)
+def register_user(request):
+	if request.method == 'POST':
+		form = SignUpForm(request.POST)
+		if form.is_valid():
+			form.save()
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password1']
+			user = authenticate(username=username,password=password)
+			login(request,user)
+			messages.success(request, ('Registration Successful!'))
+			return redirect('home')
+	else:
+		form = SignUpForm()
+	context = {'form':form}
+	return render(request, 'authenticate/register.html', context)
+
+
 def landing(request):
 	return redirect(request, 'authenticate/landing.html', {})
+
+@login_required
 def view_prof(request):
 	return render(request, 'authenticate/viewprof.html', {})
 
@@ -95,6 +89,8 @@ def logout_user(request):
 	# messages.success(request, 'You have been logged out')
 	return redirect('home')
 
+
+@login_required
 def edit_profile(request):
 	if request.method == 'POST':
 		form = EditProfileForm(request.POST, instance=request.user)
@@ -107,6 +103,7 @@ def edit_profile(request):
 	context = {'form':form}
 	return render(request, 'authenticate/edit_profile.html', context)
 
+@login_required
 def change_password(request):
 	if request.method == 'POST':
 		form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -132,8 +129,9 @@ class StdentSignUp(CreateView):
 
 	def form_valid(self, form):
 		user = form.save()
-		login(self.request, user)
-		return redirect('home')
+		# login(self.request, user) no need to login directly
+		 # messages.success(('Registration Successful!'))
+		return redirect('login')
 
 class StaffSign(CreateView):
 	model = User
@@ -148,3 +146,95 @@ class StaffSign(CreateView):
 		user = form.save()
 		login(self.request, user)
 		return redirect('home')
+
+@login_required
+class viewNotice(TemplateView):
+	template_name = 'authenticate/viewnotice.html'
+
+	def get(self,request):
+		form = viewnotice
+		notices = Notice.objects.all()
+		context = {'form':form}
+		return render(request, 'template_name', context)
+# @login_required
+# class viewFeedback(TemplateView):
+# 	template_name = 'authenticate/viewfeedback.html'
+#
+# 	def get(self,request):
+# 		form = viewFeedback
+# 		feedback = SendFeedback.objects.all()
+# 		context = {'form':form}
+# 		return render(request, 'template_name', context)
+
+@login_required
+def notice(request):
+	form = NoticeForm(request.POST or None)
+	if request.method == 'POST':
+		form = NoticeForm(request.POST)
+		if form.is_valid():
+			post = form.save(commit=False)
+			post.posted_by = request.user
+			post.save()
+			messages.success(request,('Your Notice has been posted'))
+			return redirect('createnotice')
+	else:
+		form = NoticeForm()
+	context = {'form': form}
+	return render(request, 'authenticate/createnotice.html', context)
+
+@login_required
+@student_required
+def feedback(request):
+	form = SendFeedbackForm(request.POST or None)
+	if request.method == 'POST':
+		form = SendFeedbackForm(request.POST)
+		if form.is_valid():
+			send = form.save(commit=False)
+			send.sent_by = request.user
+			send.save()
+			messages.success(request,('Feedback Submitted Successfully'))
+			return redirect('feedback')
+		else:
+			form = SendFeedbackForm()
+	context = {'form': form}
+	return render(request, 'authenticate/feedback.html', context)
+
+# @method_decorator([login_required], name='dispatch')
+class ViewNotice(ListView):
+	context_object_name = 'notices'
+	template_name='authenticate/facultynotice.html'
+	def get_queryset(self):
+		today = date.today()
+		return Notices.objects.filter(due_date__gte=today)
+
+# @method_decorator([login_required], name='dispatch')
+class NoticeDetails(DetailView):
+	model = Notices
+	template_name='authenticate/notice_details.html'
+
+
+# @method_decorator([login_required], name='dispatch')
+class ViewNotice(ListView):
+	context_object_name = 'notices'
+	template_name='authenticate/departmentnotice.html'
+	def get_queryset(self):
+		today = date.today()
+		return Notices.objects.filter(due_date__gte=today)
+
+# @method_decorator([login_required], name='dispatch')
+class NoticeDetails(DetailView):
+	model = Notices
+	template_name='authenticate/notice_details.html'
+
+
+
+class viewFeedback(ListView):
+	context_object_name = 'feedbacks'
+	template_name='authenticate/viewfeedback.html'
+	def get_queryset(self):
+		today = date.today()
+		return SendFeedback.objects.all()
+
+class FeedbackDetails(DetailView):
+	model = SendFeedback
+	template_name='authenticate/feedback_details.html'

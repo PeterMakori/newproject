@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from authenticate.models import User
 from django import forms
-from .models import SendFeedback
+from .models import SendFeedback,Notices
+from django.forms import ModelForm,Textarea
 
 class EditProfileForm(UserChangeForm):
     email = forms.EmailField(label="", help_text = '', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -101,3 +102,14 @@ class SendFeedbackForm(forms.ModelForm):
     class Meta:
         model = SendFeedback
         fields = ('type', 'subject', 'message',)
+        widgets = {
+            'message': Textarea(attrs={'class':'form-control','cols':4, 'rows':5}),
+        }
+
+class NoticeForm(forms.ModelForm):
+    class Meta:
+        model = Notices
+        fields = ('topic','notice','due_date',)
+        widgets = {
+            'notice': Textarea(attrs={'class':'form-control','cols':4, 'rows':5}),
+        }

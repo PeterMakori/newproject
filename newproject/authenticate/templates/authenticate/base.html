@@ -34,7 +34,7 @@
 	}
 	input[type=text] {
 	  background-color: #f1f1f1;
-	  width: 100%;
+	  /* width: 100%;  affects timepicker alignment negatively*/
 	}
 	input[type=submit] {
 	  background-color: DodgerBlue;
@@ -90,6 +90,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/sidenav.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/login.css' %}">
 <link rel="stylesheet" type="text/css" href="{%  static 'bootstrap/css/login.css' %}">
+{% comment %} <link rel="stylesheet" type="text/css" href="{%  static 'bootstrap/css/animate.min.css' %}"> {% endcomment %}
 
 
 
@@ -121,6 +122,7 @@
 <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Lato|Ubuntu' rel='stylesheet' type='text/css'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js" rel="stylesheet" type="text/css">
 
 
 	<!-- <div>
@@ -152,34 +154,39 @@
 
 					  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					    <ul class="navbar-nav ml-auto">
-					      {% comment %} <li class="nav-item active">
-					      <b>  <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></b>
-					      </li> {% endcomment %}
-					      <li class="nav-item">
 					        <a class="nav-link" href="{% url 'logout' %}"> <b> Logout </b></a>
 					      </li>
 
 
 			 {% else %}
 
-											 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary">
+											 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
 									 <a class="navbar-brand" href="#">E-NoticeBoard Portal</a>
 									 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										 <span class="navbar-toggler-icon"></span>
 									 </button>
 
 									 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+										 {% comment %} <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+										   Dropdown <span class="caret"></span>
+										  </button> {% endcomment %}
+
 										 <ul class="navbar-nav ml-auto">
-											 <li class="nav-item active">
-												 <a class="nav-link" href="{% url 'home' %}"> <b>Home </b> <span class="sr-only">(current)</span></a>
+											 <li class="nav-item">
+												 <a class="nav-link" href="{% url 'home' %}"> <b>Home </b></a>
 
 
-													<li class="nav-item">
-										        <a class="nav-link" href="{% url 'login' %}"> <b>Login </b></a>
+																	<li class="nav-item">
+													        <a class="nav-link" href="{% url 'login' %}"> <b>Login </b></a>
+																	</li>
+
+
+
+
 										      </li>
-													<li class="nav-item">
+													{% comment %} <li class="nav-item">
 										        <a class="nav-link" href="{% url 'signupstudent' %}"> <b> Register </b></a>
-										      </li>
+										      </li> {% endcomment %}
 										    </ul>
 
 
@@ -195,8 +202,7 @@
 
 
 
-
-	{% if user.is_authenticated %}
+			{% if user.is_authenticated %}
 	<!-- SideNav slide-out button -->
 	<!-- Sidebar -->
 
@@ -211,14 +217,27 @@
 
 			<ul class="list-unstyled components">
 					<p> <b>E-NoticeBoard Portal</b> </p> <br/>
+					{% if user.is_dean or user.is_cod %}
+					<li>
+							<a href="{% url 'createnotice' %}">Create Notice</a>
+					</li>
+
+					<li>
+							<a href="{% url 'viewfeedback' %}">View Feedbacks</a>
+					</li>
+					{% endif %}
+
+					{% if user.is_student %}
+
+
 					<li class="active">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Notice</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Notices</a>
 							<ul class="collapse list-unstyled" id="homeSubmenu">
 									<li>
-											<a href="{% url 'adminnotice' %}">Administration</a>
+											<a href="{% url 'view_notices' %}">Faculty</a>
 									</li>
 									<li>
-											<a href="{% url 'facultynotice' %}">Faculty</a>
+											<a href="{% url 'view_notices' %}">Department</a>
 									</li>
 									<li>
 											<a href="{% url 'departmentnotice' %}">Department</a>
@@ -228,12 +247,20 @@
 									</li>
 							</ul>
 					</li>
+
 					<li>
 							<a href="{% url 'search' %}">Search Notices</a>
 					</li>
 					<li>
 							<a href="{% url 'feedback' %}">Give Feedback</a>
 					</li>
+
+
+
+					<li>
+							<a href="#">Contact</a>
+					</li>
+					{% endif %}
 					<li>
 							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Profile</a>
 							<ul class="collapse list-unstyled" id="pageSubmenu">
@@ -249,9 +276,6 @@
 							</ul>
 					</li>
 
-					<li>
-							<a href="#">Contact</a>
-					</li>
 			</ul>
 	</nav>
 
@@ -277,33 +301,10 @@
 </div> {% endcomment %}
 
 
-	{% endif %}
-
-
-	<div class="container" style="width:700px;">
-		{% if messages %}
-			{% for message in messages %}
-				<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-					<button class="close" data-dismiss="alert">
-				<!--  <span aria-hidden="true">&times;</span>  -->
-						<small><sup>x</sup></small>
-
-					</button>
-						<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
-
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		</div> -->
+	   {% endif %}
 
 
 
-
-					{{ message }}
-				</div>
-			{% endfor %}
-		{% endif %}
-</div>
 
 	{% block content %}
 
@@ -356,8 +357,23 @@
 								$( function() {
 									$( "#from1" ).datepicker({
 
-											dateFormat: "yy/mm/dd",
+											dateFormat: "yy-mm-dd",
 											maxDate: 0,
+											constrainInput: true,
+
+									});
+								} );
+								</script>
+
+								<script>
+								$( function() {
+									$( "#id_due_date" ).datepicker({
+
+											dateFormat: "yy-mm-dd",
+											constrainInput: true,
+											minDate: 0,
+
+
 
 									});
 								} );
@@ -367,18 +383,27 @@
 								$( function() {
 									$( "#to1" ).datepicker({
 
-											dateFormat: "yy/mm/dd",
-											maxDate: 0,
+											dateFormat: "yy-mm-dd",
+											constrainInput: true,
+
 
 
 									});
 								} );
 								</script>
 
+
 								<script>
 
-								var faculties = ["Agriculture","Science","FEDCOS","NARE","Engineering","Animal Science", "Vetarinary Medicine","Medicine",];
-								var departments = ["Computer Science","Community Studies &amp; Extension","Pyschology","Soil Science"];
+								var faculties = ["Faculty of Agriculture","Faculty of Arts and Sciences","Faculty of Commerce","Faculty of Education and Community Studies","Faculty of Engineering and Technology",
+								"Faculty of Environment and Resource Development", "Faculty of Health Sciences","Faculty of Law","Faculty of Science","Faculty of Veterinary Medicine and Surgery","Institute of Women Gender and Development Studies",
+							"College of Open and Distance Learning","Directorates"];
+								var departments = ["Department of Economics","Department of Languages, Literature and Linguistics","Department of Peace Security and Social Studies","Department of Philosophy, History and Religion",
+																	 "Department of Business Administration; housing the disciplines of Human Resource Management, Marketing, Insurance and Strategic Management","Department of Accounting, Finance and Managemen","Department of Operation Research and Information Systems",
+																 "Agricultural Education and Extension","Applied Community and Development Studies","Psychology, Counseling and Educational Foundations and Curriculum","Instruction and Educational Management",
+																  "Agricultural Engineering (AGEN)","Civil and Environmental Engineering (CEEN)","Industrial and Energy Engineering (IEEN)","Electrical and Control Engineering (ECEN)",
+																"Department of Environmental Science","Department of Geography","Department of Natural Resources",
+																"Department of Botany","Department of Zoology","Department of Computer Science","Department of Mathematics","Department of Physics and Chemistry"];
 
 								</script>
 
