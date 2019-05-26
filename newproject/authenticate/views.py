@@ -24,18 +24,18 @@ def about(request):
 
 def contact(request):
 	return render(request, 'authenticate/contact.html', {})
+#
+# def admin_notice(request):
+# 	return render(request, 'authenticate/adminnotice.html', {})
+#
+# def faculty_notice(request):
+# 	return render(request, 'authenticate/facultynotice.html', {})
+#
+# # def department_notice(request):
+# # 	return render(request, 'authenticate/departmentnotice.html', {})
 
-def admin_notice(request):
-	return render(request, 'authenticate/adminnotice.html', {})
-
-def faculty_notice(request):
-	return render(request, 'authenticate/facultynotice.html', {})
-
-def department_notice(request):
-	return render(request, 'authenticate/departmentnotice.html', {})
-
-def accommodation_notice(request):
-	return render(request, 'authenticate/accommodationnotice.html', {})
+# def accommodation_notice(request):
+# 	return render(request, 'authenticate/accommodationnotice.html', {})
 
 @login_required
 @student_required
@@ -69,16 +69,12 @@ def register_user(request):
 			password = form.cleaned_data['password1']
 			user = authenticate(username=username,password=password)
 			login(request,user)
-			messages.success(request, ('Registration Successful!'))
+			messages.success(requForeignKeyest, ('Registration Successful!'))
 			return redirect('home')
 	else:
 		form = SignUpForm()
 	context = {'form':form}
 	return render(request, 'authenticate/register.html', context)
-
-
-def landing(request):
-	return redirect(request, 'authenticate/landing.html', {})
 
 @login_required
 def view_prof(request):
@@ -86,7 +82,6 @@ def view_prof(request):
 
 def logout_user(request):
 	logout(request)
-	# messages.success(request, 'You have been logged out')
 	return redirect('home')
 
 
@@ -147,24 +142,6 @@ class StaffSign(CreateView):
 		login(self.request, user)
 		return redirect('home')
 
-@login_required
-class viewNotice(TemplateView):
-	template_name = 'authenticate/viewnotice.html'
-
-	def get(self,request):
-		form = viewnotice
-		notices = Notice.objects.all()
-		context = {'form':form}
-		return render(request, 'template_name', context)
-# @login_required
-# class viewFeedback(TemplateView):
-# 	template_name = 'authenticate/viewfeedback.html'
-#
-# 	def get(self,request):
-# 		form = viewFeedback
-# 		feedback = SendFeedback.objects.all()
-# 		context = {'form':form}
-# 		return render(request, 'template_name', context)
 
 @login_required
 def notice(request):
@@ -199,32 +176,19 @@ def feedback(request):
 	context = {'form': form}
 	return render(request, 'authenticate/feedback.html', context)
 
-# @method_decorator([login_required], name='dispatch')
-class ViewNotice(ListView):
-	context_object_name = 'notices'
-	template_name='authenticate/facultynotice.html'
-	def get_queryset(self):
-		today = date.today()
-		return Notices.objects.filter(due_date__gte=today)
 
 # @method_decorator([login_required], name='dispatch')
-class NoticeDetails(DetailView):
-	model = Notices
-	template_name='authenticate/notice_details.html'
-
-
-# @method_decorator([login_required], name='dispatch')
-class ViewNotice(ListView):
-	context_object_name = 'notices'
-	template_name='authenticate/departmentnotice.html'
-	def get_queryset(self):
-		today = date.today()
-		return Notices.objects.filter(due_date__gte=today)
+def ViewNotice(request):
+	today = date.today()
+	notices =Notices.objects.filter(due_date__gte=today).order_by('-created_on')
+	return render(request,'authenticate/facultynotice.html', {'notices': notices})
 
 # @method_decorator([login_required], name='dispatch')
-class NoticeDetails(DetailView):
-	model = Notices
-	template_name='authenticate/notice_details.html'
+def NoticeDetails(request, notice_id):
+	today = date.today()
+	nots =Notices.objects.filter(due_date__gte=today).filter(pk=notice_id)
+	# print(notices)
+	return render(request,'authenticate/noticedetails.html',{'nots': nots})
 
 
 
@@ -232,8 +196,8 @@ class viewFeedback(ListView):
 	context_object_name = 'feedbacks'
 	template_name='authenticate/viewfeedback.html'
 	def get_queryset(self):
-		today = date.today()
-		return SendFeedback.objects.all()
+		# today = date.today()
+		return SendFeedback.objects.all().order_by('-sent_on')
 
 class FeedbackDetails(DetailView):
 	model = SendFeedback

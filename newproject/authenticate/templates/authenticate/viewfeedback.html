@@ -1,5 +1,6 @@
 
 {% extends 'authenticate/base.html' %}
+{% load staticfiles %}
 
 
 <!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
@@ -18,26 +19,30 @@
 
 </div>
 <div class="row">
-  <div class="col col-md-7 offset-md-3">
+  <!-- <div class="col col-md-7 offset-md-3"> -->
 
+    <div class="col-md-8 offset-md-3">
+      <div class="card">
+            <div class="card-header">
 
+                <h4 class="card-title text-center">Faculty Feedbacks</h4>
+
+                </div>
+<div class="card-body">
     <table class="table">
       <thead>
         <tr>
           <th>Type</th>
           <th>Subject</th>
           <th>Sent On</th>
-          <th> Message</th>
+          <th>Message</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
-        {% if list1 %}
-          {% for feedback in list1 %}
-            <span>{{list1}}</span>
-          {% endfor %}
-        {% endif %}
-        {% for feedback in list1 %}
-        <!-- {% if feedback.sent_by.user == user.faculty or feedback.sent_by.user == user.department %} -->
+
+       {% for feedback in feedbacks %}
+
 
           <tr>
             <td>{{ feedback.type }}</td>
@@ -45,20 +50,23 @@
             <td> {{ feedback.sent_on }}</td>
             <td>{{ feedback.message }}</td>
 
-              <!-- <td>{{ notice.posted_by.faculty }},{{notice.posted_by.department }}</td> -->
+              <td> <img src="{% static 'images/givef.gif' %}" alt=""> </td>
 
-
-            <td><a href="{% url 'read_notice_details' notice.id%}" class="btn btn-primary btn-sm">Read Details</a></td>
+            <td><a href="{% url 'read_notice_details' feedback.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
 
           </tr>
-          {% endif %}
+
         {% endfor %}
       </tbody>
     </table>
-
-
-
   </div>
 
+
 </div>
+</div>
+
+</div>
+
+</br></br>
+
 {% endblock content%}

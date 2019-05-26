@@ -24,6 +24,8 @@
 	#id_password2{
 			margin-top: 14px;
 	}
+
+
 	input {
 	  border: 1px solid transparent;
 	  background-color: #f1f1f1;
@@ -42,6 +44,7 @@
 	  background-color: #f1f1f1;
 	  width: 100%;
 	}
+
 	.form-control-items {
 	  position: absolute;
 	  border: 1px solid #d4d4d4;
@@ -68,6 +71,8 @@
 	  background-color: DodgerBlue !important;
 	  color: #ffffff;
 	}
+
+
 	</style>
 
 	{% block title %}
@@ -231,12 +236,14 @@
 									<li>
 											<a href="{% url 'view_notices' %}">Faculty</a>
 									</li>
-									
 									<li>
-											<a href="#">Department</a>
+											<a href="{% url 'view_notices' %}">Department</a>
 									</li>
 									<li>
-											<a href="#">Accommodation</a>
+											<a href="{% url 'departmentnotice' %}">Department</a>
+									</li>
+									<li>
+											<a href="{% url 'accommodationnotice' %}">Accommodation</a>
 									</li>
 							</ul>
 					</li>
@@ -272,7 +279,6 @@
 			</ul>
 	</nav>
 
-</div>
 
 
 <br/><br/><br/>
@@ -332,20 +338,28 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 					 <script type="text/javascript">
+
+
 				$(document).ready(function () {
+
 				    $('#sidebarCollapse').on('click', function () {
 				        $('#sidebar').toggleClass('active');
 								$('#navmenu').toggleClass('nactive');
+
 				    });
+
 				});
+
 				</script>
 
 								<script>
 								$( function() {
 									$( "#from1" ).datepicker({
+
 											dateFormat: "yy-mm-dd",
 											maxDate: 0,
 											constrainInput: true,
+
 									});
 								} );
 								</script>
@@ -353,9 +367,13 @@
 								<script>
 								$( function() {
 									$( "#id_due_date" ).datepicker({
+
 											dateFormat: "yy-mm-dd",
 											constrainInput: true,
 											minDate: 0,
+
+
+
 									});
 								} );
 								</script>
@@ -363,29 +381,37 @@
 								<script>
 								$( function() {
 									$( "#to1" ).datepicker({
+
 											dateFormat: "yy-mm-dd",
 											constrainInput: true,
+
+
+
 									});
 								} );
 								</script>
 
 
 								<script>
+
 								var faculties = ["Faculty of Agriculture","Faculty of Arts and Sciences","Faculty of Commerce","Faculty of Education and Community Studies","Faculty of Engineering and Technology",
 								"Faculty of Environment and Resource Development", "Faculty of Health Sciences","Faculty of Law","Faculty of Science","Faculty of Veterinary Medicine and Surgery","Institute of Women Gender and Development Studies",
 							"College of Open and Distance Learning","Directorates"];
 								var departments = ["Department of Economics","Department of Languages, Literature and Linguistics","Department of Peace Security and Social Studies","Department of Philosophy, History and Religion",
-																	 "Department of Business Administration; housing the disciplines of Human Resource Management, Marketing, Insurance and Strategic Management","Department of Accounting, Finance and Managemen","Department of Operation Research and Information Systems",
+																	 "Department of Business Administration; housing the disciplines of Human Resource Management, Marketing, Insurance and Strategic Management","Department of Accounting, Finance and Management","Department of Operation Research and Information Systems",
 																 "Agricultural Education and Extension","Applied Community and Development Studies","Psychology, Counseling and Educational Foundations and Curriculum","Instruction and Educational Management",
 																  "Agricultural Engineering (AGEN)","Civil and Environmental Engineering (CEEN)","Industrial and Energy Engineering (IEEN)","Electrical and Control Engineering (ECEN)",
 																"Department of Environmental Science","Department of Geography","Department of Natural Resources",
 																"Department of Botany","Department of Zoology","Department of Computer Science","Department of Mathematics","Department of Physics and Chemistry"];
+
 								</script>
 
 
 
 
 							<script>
+
+
 							function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -482,6 +508,7 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
+
 							</script>
 
 

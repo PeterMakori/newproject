@@ -117,6 +117,8 @@ class SendFeedback(models.Model):
     message = models.TextField(max_length=255)
     sent_on = models.DateTimeField(auto_now_add=True)
 
+    objects = models.Manager()
+
     def __str__(self):
         return self.type + ' ' + self.subject + ' ' + self.message
 

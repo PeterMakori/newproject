@@ -1,5 +1,6 @@
 
 {% extends 'authenticate/base.html' %}
+{% load staticfiles %}
 
 
 <!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
@@ -14,11 +15,20 @@
 {% block content %}
 
 
-<div class="container" style="width:700px;">
-
-</div>
 <div class="row">
-  <div class="col col-md-7 offset-md-3">
+  <!-- <div class="col col-md-7 offset-md-3"> -->
+
+    <div class="col-md-8 offset-md-3">
+      <div class="card">
+            <div class="card-header">
+                {% for notice in notices %}
+              {% if notice.posted_by.faculty == user.faculty %}
+                <h4 class="card-title text-center">Faculty of {{ notice.posted_by.faculty }} Notices</h4>
+              {% endif %}
+              {% endfor %}
+
+                </div>
+<div class="card-body">
 
 
     <table class="table">
@@ -27,8 +37,8 @@
           <th>Topic</th>
           <th>Posted on</th>
           <th>Due date</th>
-          <th>Details</th>
-          <th>Notice level</th>
+
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
@@ -37,12 +47,16 @@
         {% if notice.posted_by.faculty == user.faculty %}
 
           <tr>
-            <td>{{ notice.topic }}</td>
+            <td>{{ notice.topic }} </td>
             <td>{{ notice.created_on }}</td>
             <td> {{ notice.due_date }}</td>
-            <td>{{ notice.notice }}</td>
 
-              <td>{{ notice.posted_by.faculty }},{{notice.posted_by.department }}</td>
+
+
+              <td> <img src="{% static 'images/info.gif' %}" alt=""> </td>
+
+
+
 
 
             <td><a href="{% url 'read_notice_details' notice.id%}" class="btn btn-primary btn-sm">Read Details</a></td>
@@ -52,10 +66,12 @@
         {% endfor %}
       </tbody>
     </table>
-
+      </div>
 
 
   </div>
+  </div>
 
 </div>
+</br></br>
 {% endblock content%}
