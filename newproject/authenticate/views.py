@@ -178,19 +178,36 @@ def feedback(request):
 
 
 # @method_decorator([login_required], name='dispatch')
-def ViewNotice(request):
-	today = date.today()
-	notices =Notices.objects.filter(due_date__gte=today).order_by('-created_on')
-	return render(request,'authenticate/facultynotice.html', {'notices': notices})
+# class ViewNotice(ListView):
+# 	template_name = 'authenticate/facultynotice.html'
+# 	context_object_name = 'notices'
+# 	def get_queryset(self):
+# 		today = date.today()
+# 		return Notices.objects.filter(due_date__gte=today).order_by('-created_on')
 
 # @method_decorator([login_required], name='dispatch')
-def NoticeDetails(request, notice_id):
+# class NoticeDetails(DetailView):
+# 	model = Notices
+# 	print(Notices)
+# 	template_name = 'authenticate/noticedetails.html'
+
+def faculty_notice(request):
 	today = date.today()
-	nots =Notices.objects.filter(due_date__gte=today).filter(pk=notice_id)
-	# print(notices)
-	return render(request,'authenticate/noticedetails.html',{'nots': nots})
+	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_dean =True).order_by('-created_on')
+	return render(request,'authenticate/facultynotice.html', {'notices':notices} )
 
+def faculty_notice_details(request, pk):
+	notice = Notices.objects.get(pk=pk)
+	return render(request,'authenticate/facultynoticedetails.html', {'notice':notice})
 
+def department_notice(request):
+	today = date.today()
+	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_cod =True).order_by('-created_on')
+	return render(request,'authenticate/department_notice.html', {'notices':notices} )
+
+def department_notice_details(request, pk):
+	notice = Notices.objects.get(pk=pk)
+	return render(request,'authenticate/department_noticed_details.html', {'notice':notice})
 
 class viewFeedback(ListView):
 	context_object_name = 'feedbacks'

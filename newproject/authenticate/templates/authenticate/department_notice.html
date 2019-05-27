@@ -22,7 +22,7 @@
       <div class="card">
             <div class="card-header">
 
-                <h4 class="card-title text-center">Faculty Notices</h4>
+                <h4 class="card-title text-center">Department Notices</h4>
 
 
                 </div>
@@ -42,7 +42,7 @@
       <tbody>
 
         {% for notice in notices %}
-        {% if notice.posted_by.faculty == user.faculty %}
+        {% if notice.posted_by.department == user.department %}
           <tr>
             <td>{{ notice.topic }} </td>
             <td>{{ notice.created_on }}</td>
@@ -56,7 +56,7 @@
 
 
 
-            <td><a href="{% url 'read_notice_details' notice.id%}" class="btn btn-primary btn-sm">Read Details</a></td>
+            <td><a href="{% url 'read_department_notice' notice.id%}" class="btn btn-primary btn-sm">Read Details</a></td>
 
           </tr>
           {% endif %}
