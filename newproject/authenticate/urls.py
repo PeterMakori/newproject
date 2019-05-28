@@ -22,11 +22,11 @@ urlpatterns = [
     # path('signup/staff', StaffSign.as_view(), name="signupstaff"),
     path('createnotice/', views.notice, name="createnotice"),
     url(r'^faculty/notices/', views.faculty_notice, name="view_notices"),
-    path(r'^faculty/notice/<pk>/',views.faculty_notice_details, name="read_notice_details"),
+    path('faculty/notice/<pk>/',views.faculty_notice_details, name="read_notice_details"),
     url(r'^feedbacks/', viewFeedback.as_view(), name="viewfeedback"),
     url(r'^feedback/view/(?P<pk>[0-9]+)/$', FeedbackDetails.as_view(), name="read_feedback_details"),
     url(r'^department/notices/', views.department_notice, name="department_notices"),
-    path(r'^department/notice/<pk>/',views.department_notice_details, name="read_department_notice"),
+    path('department/notice/<pk>/',views.department_notice_details, name="read_department_notice"),
 
 
 
