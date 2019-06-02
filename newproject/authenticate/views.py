@@ -69,7 +69,7 @@ def register_user(request):
 			password = form.cleaned_data['password1']
 			user = authenticate(username=username,password=password)
 			login(request,user)
-			messages.success(requForeignKeyest, ('Registration Successful!'))
+			messages.success(request, ('Registration Successful!'))
 			return redirect('home')
 	else:
 		form = SignUpForm()
@@ -106,7 +106,7 @@ def change_password(request):
 			form.save()
 			update_session_auth_hash(request, form.user)
 			messages.success(request, ('You Have Changed Your Password.'))
-			return redirect('home')
+			return redirect('change_password')
 	else:
 		form = PasswordChangeForm(user=request.user)
 	context = {'form':form}
@@ -209,13 +209,10 @@ def department_notice_details(request, pk):
 	notice = Notices.objects.get(pk=pk)
 	return render(request,'authenticate/department_noticed_details.html', {'notice':notice})
 
-class viewFeedback(ListView):
-	context_object_name = 'feedbacks'
-	template_name='authenticate/viewfeedback.html'
-	def get_queryset(self):
-		# today = date.today()
-		return SendFeedback.objects.all().order_by('-sent_on')
+def view_Feedback(request):
+	feedbacks = SendFeedback.objects.filter().order_by('-sent_on')
+	return render(request,'authenticate/viewfeedback.html', {'feedbacks':feedbacks} )
 
-class FeedbackDetails(DetailView):
-	model = SendFeedback
-	template_name='authenticate/feedback_details.html'
+def Feedback_Details(request, pk):
+	feedback = SendFeedback.objects.get(pk=pk)
+	return render(request,'authenticate/facultyfeeddetails.html', {'feedback':feedback})

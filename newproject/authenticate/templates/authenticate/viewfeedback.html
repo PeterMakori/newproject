@@ -32,7 +32,9 @@
     <table class="table">
       <thead>
         <tr>
+
           <th>Type</th>
+          <th>Sent By</th>
           <th>Subject</th>
           <th>Sent On</th>
           <th>Message</th>
@@ -41,21 +43,22 @@
       </thead>
       <tbody>
 
-       {% for feedback in feedbacks %}
-
+        {% for feedback in feedbacks %}
+        {% if feedback.sent_by.faculty == user.faculty %}
 
           <tr>
             <td>{{ feedback.type }}</td>
+            <td>{{ feedback.sent_by }}</td>
             <td>{{ feedback.subject }}</td>
             <td> {{ feedback.sent_on }}</td>
             <td>{{ feedback.message }}</td>
 
               <td> <img src="{% static 'images/givef.gif' %}" alt=""> </td>
 
-            <td><a href="{% url 'read_notice_details' feedback.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
+            <td><a href="{% url 'read_feedback_details' feedback.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
 
           </tr>
-
+          {% endif %}
         {% endfor %}
       </tbody>
     </table>

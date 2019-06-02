@@ -5,6 +5,8 @@
 
 {% endblock %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
 <h1 class="text-center" style = "margin-top:45px">Edit Profile</h1>
@@ -31,7 +33,7 @@
 
 		{% endif %}
 
-		{{ form.as_p }}
+		{{ form | crispy }}
 
     <div class="form-group">
        <label class="col-md-4 control-label" for="singlebutton"></label>
@@ -43,7 +45,7 @@
     </div>
 
 	</form>
-		<p><small><a href="{% url 'change_password' %}">Click Here</a> To Change Your Password</small></p>
-		</div
+		<p><small><a href="{% url 'change_password' %}"><i>Click Here To Change Your Password </i></a></small></p>
+</div>
 	  <br/><br/></br>
 {% endblock %}

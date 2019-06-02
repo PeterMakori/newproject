@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from authenticate.views import viewFeedback,FeedbackDetails
+from authenticate.views import view_Feedback,Feedback_Details
 from django.conf.urls import url
 
 
@@ -23,8 +23,8 @@ urlpatterns = [
     path('createnotice/', views.notice, name="createnotice"),
     url(r'^faculty/notices/', views.faculty_notice, name="view_notices"),
     path('faculty/notice/<pk>/',views.faculty_notice_details, name="read_notice_details"),
-    url(r'^feedbacks/', viewFeedback.as_view(), name="viewfeedback"),
-    url(r'^feedback/view/(?P<pk>[0-9]+)/$', FeedbackDetails.as_view(), name="read_feedback_details"),
+    url(r'^feedbacks/', views.view_Feedback, name="viewfeedback"),
+    path('feedback/feedback/<pk>/', views.Feedback_Details, name="read_feedback_details"),
     url(r'^department/notices/', views.department_notice, name="department_notices"),
     path('department/notice/<pk>/',views.department_notice_details, name="read_department_notice"),
 
