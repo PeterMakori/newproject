@@ -108,8 +108,6 @@ class User(AbstractBaseUser):
 
 
 
-
-
 class SendFeedback(models.Model):
     sent_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     type = models.CharField(max_length=100)

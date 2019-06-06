@@ -211,7 +211,7 @@
 			</div> {% endcomment %}
 
 			<ul class="list-unstyled components">
-					<p> <b>E-NoticeBoard Portal</b> </p> <br/>
+					<p> <b></b> </p> <br/>
 					{% if user.is_dean or user.is_cod %}
 					<li>
 							<a href="{% url 'createnotice' %}">Create Notice</a>
@@ -235,9 +235,7 @@
 									<li>
 											<a href="{% url 'department_notices' %}">Department</a>
 									</li>
-									<li>
-											<a href="#">Accommodation</a>
-									</li>
+									
 							</ul>
 					</li>
 
@@ -245,7 +243,7 @@
 							<a href="{% url 'search' %}">Search Notices</a>
 					</li>
 					<li>
-							<a href="{% url 'feedback' %}">Give Feedback</a>
+							<a href="{% url 'feedback' %}">Suggestion Box</a>
 					</li>
 
 
