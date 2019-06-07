@@ -8,18 +8,34 @@
 
 {% block content %}
 
-<!--
-<input type="text" class="form-control" name="">
-<button type="button" class="btn btn-success"> Success</button> -->
 
 {% if user.is_authenticated %}
-<h2 class="text-center" style = "margin-top:100px">Your profile is:</h2>
+<div class="row">
+	<!-- <div class="col col-md-7 offset-md-"> -->
+  
+	  <div class="col-md-6 offset-md-4">
+		<div class="card">
+			  <div class="card-header">
+  
+				  <h4 class="card-title text-center">My Profile</h4>
+  
+  
+				  </div>
+  <div class="card-body">
 
-	<p class="text-center"> Name: {{ user.first_name }} {{ user.last_name }}</p>
-	<p class="text-center"> Email: {{ user.email }} </p>
-	<p class="text-center"> Faculty: {{ user.faculty }} </p>
-	<p class="text-center"> Department: {{ user.department }} </p>
+	<h5 class="h5 mt-4"><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</h5>
+	<h5 class="h5 mt-4"><strong>Email:</strong> {{ user.email }} </h5>
+	<h5 class="h5 mt-4"><strong>Faculty:</strong> {{ user.faculty }} </h5>
+	<h5 class="h5 mt-4"><strong>Department:</strong> {{ user.department }} </h5>
 
 {% endif %}
+</div>
+
+
+</div>
+</div>
+
+</div>
+</br></br>
 
 {% endblock %}

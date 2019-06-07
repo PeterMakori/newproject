@@ -54,11 +54,12 @@
 
 
 
-
-
             <td><a href="{% url 'read_notice_details' notice.id%}" class="btn btn-primary btn-sm">Read Details</a></td>
 
           </tr>
+
+          {% else %}
+          <h5 class="card-title text-center"><strong>No Notice Posted</strong></h5>
           {% endif %}
         {% endfor %}
       </tbody>

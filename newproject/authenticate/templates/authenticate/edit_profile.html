@@ -9,8 +9,18 @@
 
 {% block content %}
 
-<h1 class="text-center" style = "margin-top:45px">Edit Profile</h1>
-<div class="col-md-4 offset-md-5">
+<main class="mdl-layout__content mdl-color--grey-100">
+	<div class="mdl-grid demo-content">
+		<div class="container-fluid">
+  
+			<div class="row">
+				<div class="col-md-8 offset-md-3">
+					<div class="card">
+						<div class="card-header text-center">
+							<h4 class="card-title">Edit Profile</h4>
+						</div>
+						   <div class="card-body">
+						<div class="container">
 	<form method="POST" action="{% url 'edit_profile' %}">
 		{% csrf_token %}
 		{% if form.errors %}
@@ -32,6 +42,10 @@
 
 
 		{% endif %}
+	</div>
+</div>
+<div class="row">
+  <div class="container col-md-4 offset-md-4 d-dlex flex-fill text-center text-black align-items-center">
 
 		{{ form | crispy }}
 
@@ -46,6 +60,14 @@
 
 	</form>
 		<p><small><a href="{% url 'change_password' %}"><i>Click Here To Change Your Password </i></a></small></p>
+	</div>
+
 </div>
-	  <br/><br/></br>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</br></br>
 {% endblock %}
