@@ -1,0 +1,42 @@
+
+{% extends 'authenticate/base.html' %}
+{% load staticfiles %}
+
+
+<!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
+
+{% block title %}
+<title>E-NoticeBoard</title>
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="row">
+
+
+    <div class="col-md-8 offset-md-3">
+<div class="card">
+  <div class="card-header text-center">
+
+  Department of {{ notice.posted_by.department }}
+  </div>
+  <div class="card-body">
+    From: {{ notice.posted_by.faculty }}
+    <hr>
+    <h5 class="h5 mt-4"><strong>About</strong></h5>
+    <p class="h6"> {{ notice.topic }}</p>
+    <h5 class="h5 mt-4"><strong>Notice</strong></h5>
+    <p class="h6"> {{ notice.notice }}</p>
+    <h5 class="h5 mt-4"><strong>Expiry Date</strong></h5>
+    <p class="h6"> {{ notice.due_date }}</p>
+  </div>
+
+</div>
+</div>
+
+</div>
+{% endblock %}

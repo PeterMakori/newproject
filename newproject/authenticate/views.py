@@ -8,7 +8,7 @@ from authenticate.decorators import staff_required,student_required
 from django.views.generic import CreateView,TemplateView,ListView,DetailView
 from authenticate.models import User,Notices,SendFeedback
 from django.utils.decorators import method_decorator
-from datetime import date
+from datetime import datetime, date
 
 
 # Create your views here.
@@ -193,7 +193,7 @@ def feedback(request):
 
 def faculty_notice(request):
 	today = date.today()
-	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_dean =True).order_by('-created_on')
+	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')
 	return render(request,'authenticate/facultynotice.html', {'notices':notices} )
 
 def faculty_notice_details(request, pk):
@@ -202,7 +202,7 @@ def faculty_notice_details(request, pk):
 
 def department_notice(request):
 	today = date.today()
-	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_cod =True).order_by('-created_on')
+	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_cod =True).filter( posted_by__department=request.user.department).order_by('-created_on')
 	return render(request,'authenticate/department_notice.html', {'notices':notices} )
 
 def department_notice_details(request, pk):
@@ -216,3 +216,23 @@ def view_Feedback(request):
 def Feedback_Details(request, pk):
 	feedback = SendFeedback.objects.get(pk=pk)
 	return render(request,'authenticate/facultyfeeddetails.html', {'feedback':feedback})
+
+
+def Search_Notices(request):
+	notices_from = request.GET.get('from')
+	notices_to = request.GET.get('to')
+	if notices_from == None or notices_to ==None:
+		notices_available = Notices.objects.all().order_by('-created_on')[:1]
+	else:
+		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
+		notices_to = datetime.strptime(notices_to, "%Y-%m-%d").date()
+		print(notices_from)
+		print(notices_to)
+		notices_available = Notices.objects.filter(due_date__gte=notices_from).filter(due_date__lte=notices_to).order_by('-created_on')
+
+	context = {'notices_available':notices_available}
+	return render(request, 'authenticate/search.html', context)
+
+def search_notice_details(request, pk):
+	search = Notices.objects.get(pk=pk)
+	return render(request,'authenticate/search_noticed_details.html', {'search':search})

@@ -16,7 +16,6 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path('contact/', views.contact, name="contact"),
     path('feedback/', views.feedback, name="feedback"),
-    path('search/', views.search, name="search"),
     path('signup/', views.Signup, name="signup"),
     # path('signup/student', StdentSignUp.as_view(), name="signupstudent"),
     # path('signup/staff', StaffSign.as_view(), name="signupstaff"),
@@ -27,6 +26,9 @@ urlpatterns = [
     path('feedback/feedback/<pk>/', views.Feedback_Details, name="read_feedback_details"),
     url(r'^department/notices/', views.department_notice, name="department_notices"),
     path('department/notice/<pk>/',views.department_notice_details, name="read_department_notice"),
+    url(r'^search/notices/', views.Search_Notices, name="search"),
+    path('search/notice/<pk>/',views.search_notice_details, name="read_search_details"),
+    
 
 
 

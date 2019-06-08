@@ -28,8 +28,10 @@
                 </div>
 <div class="card-body">
 
-
-    <table class="table">
+  {% if not notices %}
+        <h5 class="card-title text-center text-danger">No availlable Notices from your Faculty at the moment</h5>
+        {% else %}
+    <table class="table table-hover table-lg">
       <thead>
         <tr>
           <th>Topic</th>
@@ -41,8 +43,9 @@
       </thead>
       <tbody>
 
+      
         {% for notice in notices %}
-        {% if notice.posted_by.faculty == user.faculty %}
+       
           <tr>
             <td>{{ notice.topic }} </td>
             <td>{{ notice.created_on }}</td>
@@ -58,10 +61,11 @@
 
           </tr>
 
-          {% else %}
-          <h5 class="card-title text-center"><strong>No Notice Posted</strong></h5>
-          {% endif %}
+         
+          
+         
         {% endfor %}
+        {% endif %}
       </tbody>
     </table>
       </div>
