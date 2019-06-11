@@ -80,6 +80,9 @@ def register_user(request):
 def view_prof(request):
 	return render(request, 'authenticate/viewprof.html', {})
 
+def find_help(request):
+	return render(request, 'authenticate/help.html', {})
+
 def logout_user(request):
 	logout(request)
 	return redirect('home')
@@ -222,13 +225,12 @@ def Search_Notices(request):
 	notices_from = request.GET.get('from')
 	notices_to = request.GET.get('to')
 	if notices_from == None or notices_to ==None:
-		notices_available = Notices.objects.all().order_by('-created_on')[:1]
+		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:1]
 	else:
 		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
 		notices_to = datetime.strptime(notices_to, "%Y-%m-%d").date()
-		print(notices_from)
-		print(notices_to)
-		notices_available = Notices.objects.filter(due_date__gte=notices_from).filter(due_date__lte=notices_to).order_by('-created_on')
+		
+		notices_available = Notices.objects.filter(due_date__gte=notices_from).filter(due_date__lte=notices_to).filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')
 
 	context = {'notices_available':notices_available}
 	return render(request, 'authenticate/search.html', context)
