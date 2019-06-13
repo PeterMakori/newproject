@@ -83,6 +83,9 @@ def view_prof(request):
 def find_help(request):
 	return render(request, 'authenticate/help.html', {})
 
+def search_help(request):
+	return render(request, 'authenticate/staff_help.html', {})
+
 def logout_user(request):
 	logout(request)
 	return redirect('home')
@@ -168,10 +171,27 @@ def feedback(request):
 	form = SendFeedbackForm(request.POST or None)
 	if request.method == 'POST':
 		form = SendFeedbackForm(request.POST)
+		send = SendFeedback()
+		
 		if form.is_valid():
 			send = form.save(commit=False)
 			send.sent_by = request.user
-			send.save()
+			send.facult = request.user.faculty
+			send.depart = request.user.department
+
+
+			where = request.POST.get('send_to')
+			if where == 'yes':
+				send.to_faculty = True
+				send.save()
+				pass
+				#turn facultry to true
+			else:
+				send.to_department = True
+				send.save()
+				pass
+				#turn department to true
+
 			messages.success(request,('Feedback Submitted Successfully'))
 			return redirect('feedback')
 		else:
@@ -213,10 +233,19 @@ def department_notice_details(request, pk):
 	return render(request,'authenticate/department_noticed_details.html', {'notice':notice})
 
 def view_Feedback(request):
-	feedbacks = SendFeedback.objects.filter().order_by('-sent_on')
-	return render(request,'authenticate/viewfeedback.html', {'feedbacks':feedbacks} )
+	feedbacks = SendFeedback.objects.filter(to_faculty =True).filter(facult__faculty=request.user.faculty).order_by('-sent_on')
+	return render(request,'authenticate/viewfeedback_fac.html', {'feedbacks':feedbacks} )
 
-def Feedback_Details(request, pk):
+def Feedback_Dep(request):
+	feedbacks = SendFeedback.objects.filter(to_department =True).filter(depart__department=request.user.department).order_by('-sent_on')
+	return render(request,'authenticate/viewfeedback_dep.html', {'feedbacks':feedbacks} )
+
+def Feedbackdept_Details(request, pk):
+	feedback = SendFeedback.objects.get(pk=pk)
+	return render(request,'authenticate/deptfeeddetails.html', {'feedback':feedback})
+
+
+def Feedback_Details(request,pk):
 	feedback = SendFeedback.objects.get(pk=pk)
 	return render(request,'authenticate/facultyfeeddetails.html', {'feedback':feedback})
 

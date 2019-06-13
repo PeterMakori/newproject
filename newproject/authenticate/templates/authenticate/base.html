@@ -153,7 +153,7 @@
 
 			 {% else %}
 
-											 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-default" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
+											 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
 									 <a class="navbar-brand" href="#">E-NoticeBoard Portal</a>
 									 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										 <span class="navbar-toggler-icon"></span>
@@ -215,9 +215,22 @@
 							<a href="{% url 'createnotice' %}">Create Notice</a>
 					</li>
 
+
+					{% if user.is_dean %}
 					<li>
 							<a href="{% url 'viewfeedback' %}">Suggestion Box</a>
 					</li>
+					{% else %}
+					<li>
+						<a href="{% url 'viewfeedbackdep' %}">Suggestion Box</a>
+				</li>
+				{% endif %}
+
+
+					<li>
+						<a href="{% url 'staffhelp' %}">Help</a>
+					</li>
+
 					{% endif %}
 
 					{% if user.is_student %}
@@ -247,7 +260,7 @@
 
 
 					<li>
-							<a href="{% url 'help' %}">Help</a>
+							<a href="{% url 'studenthelp' %}">Help</a>
 					</li>
 					{% endif %}
 					<li>

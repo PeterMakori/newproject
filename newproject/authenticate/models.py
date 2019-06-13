@@ -114,6 +114,10 @@ class SendFeedback(models.Model):
     subject = models.CharField(max_length=70)
     message = models.TextField(max_length=255)
     sent_on = models.DateTimeField(auto_now_add=True)
+    to_faculty = models.BooleanField(default=False)
+    to_department = models.BooleanField(default=False)
+    facult = models.ForeignKey(Faculty, on_delete=models.CASCADE, related_name = 'send_faculty', default=1)
+    depart = models.ForeignKey(Department, on_delete=models.CASCADE, related_name= 'send_department', default=1)
 
     objects = models.Manager()
 

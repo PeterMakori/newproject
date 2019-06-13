@@ -98,10 +98,12 @@ class StaffSignUp(UserCreationForm):
         return user
 
 
+CHOICES = [('yes','Faculty'), ('no','Department')] 
 class SendFeedbackForm(forms.ModelForm):
+    send_to = forms.ChoiceField(choices=CHOICES,widget=forms.RadioSelect())
     class Meta:
         model = SendFeedback
-        fields = ('type', 'subject', 'message',)
+        fields = ('type', 'subject', 'message')
         widgets = {
             'message': Textarea(attrs={'class':'form-control','cols':4, 'rows':5}),
         }

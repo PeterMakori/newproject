@@ -1,0 +1,75 @@
+
+{% extends 'authenticate/base.html' %}
+{% load staticfiles %}
+
+
+<!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
+
+{% block title %}
+<title>E-NoticeBoard</title>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container" style="width:700px;">
+
+</div>
+<div class="row">
+  <!-- <div class="col col-md-7 offset-md-3"> -->
+
+    <div class="col-md-8 offset-md-3">
+      <div class="card">
+            <div class="card-header">
+
+                <h4 class="card-title text-center"></h4>
+
+                </div>
+<div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+
+          <th>Type</th>
+          <th>Sent By</th>
+          <th>Subject</th>
+          <th>Sent On</th>
+          <th>Message</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for feedback in feedbacks %}
+        {% if feedback.sent_by.department == user.department %}
+
+          <tr>
+            <td>{{ feedback.type }}</td>
+            <td>{{ feedback.sent_by }}</td>
+            <td>{{ feedback.subject }}</td>
+            <td> {{ feedback.sent_on }}</td>
+            <td>{{ feedback.message }}</td>
+
+              <td> <img src="{% static 'images/givef.gif' %}" alt=""> </td>
+
+            <td><a href="{% url 'read_feed_details' feedback.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
+
+          </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+</div>
+
+</div>
+
+</br></br>
+
+{% endblock content%}

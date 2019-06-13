@@ -1,0 +1,127 @@
+{% extends 'authenticate/base.html' %}
+
+{% block title %}
+<title>E-NoticeBoard</title>
+
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container py-3">
+        <div class="row">
+            <div class="col-10 offset-md-2">
+
+
+                    <div class="alert alert-info text-center alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            This section contains a wealth of information, related to <strong> E-NoticeBoard Portal</strong> and its Functionalities. If you cannot find a solution to your challenge, 
+                            kindly send us a query through the Suggestion Box. 
+                        </div>
+
+
+                <div class="accordion" id="faqExample">
+                    <div class="card">
+                        <div class="card-header text-center p-3" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                 <b>E-NoticeBoard Help page</b> 
+                                </button>
+                              </h5>
+                        </div>
+    
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqExample">
+                            <div class="card-body">
+                                <b>E-Noticeboard system</b>  facilitates communication from the faculty representative (Dean) and the departmental representative (COD) to the students.                          </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header text-center p-2" id="headingTwo">
+                            <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Registration
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqExample">
+                            <div class="card-body">
+                                The user's accounts are created by the system administrator.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header text-center p-2" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                  Loging In
+                                </button>
+                              </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
+                            <div class="card-body">
+                                Students will log in using their registration numbers. The registration number will be the default
+                                password which you will be required to use when Loging in for the first time. On your first login, ensure you change the password using the Profile link provided.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header text-center p-2" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                  Creating Notices
+                                </button>
+                              </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqExample">
+                            <div class="card-body">
+                                The notices are organized and vsible in respect to your faculy and department. The notices are displayed immediately they are creadited and will not be visble whtn thie expiry date arrives.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                            <div class="card-header text-center p-2" id="headingFive">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                     Suggestion Box
+                                    </button>
+                                  </h5>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqExample">
+                                <div class="card-body">
+                                    You can serach notices within a specifi range period using the dates in the search field.
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                                <div class="card-header text-center p-2" id="headingSix">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                                         Profile
+                                        </button>
+                                      </h5>
+                                </div>
+                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#faqExample">
+                                    <div class="card-body">
+                                        You will be required to update your email and change your password only in the profile menu.
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+    
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+    <!--container-->
+    <br/>
+    <br/>
+
+
+{% endblock %}
+
+
