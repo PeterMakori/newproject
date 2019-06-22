@@ -19,11 +19,21 @@ class EditProfileForm(UserChangeForm):
 
     def __init__(self, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
+        if kwargs.get('instance'):
+            initial = kwargs.setdefault('initial',{})
+            if kwargs['instance'].faculty:
+                initial['faculty'] = kwargs['instance'].faculty
+            
+            else:
+                initial['faculty'] = None
+
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['username'].widget.attrs['placeholder'] = 'Username'
+        self.fields['username'].widget.attrs['readonly'] = 'readonly'
         self.fields['username'].label = ""
         self.fields['username'].help_text = '<span class = "form-text text-muted"><small> Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small> </span>'
-
+        self.fields['first_name'].widget.attrs['readonly'] = 'readonly'
+        self.fields['last_name'].widget.attrs['readonly'] = 'readonly'
 
 
 

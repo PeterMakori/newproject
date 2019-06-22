@@ -27,9 +27,16 @@
 
                 </div>
 <div class="card-body">
+{% if count > 0 %}
+ <a href="{% url 'unread_view_notices' %}" class="btn btn-primary btn-sm text-left ml-auto">{{ count }} Unread Notices</a>
+ <img src="{% static 'images/info.gif' %}" alt="">
+{% endif %}
 
-  {% if not notices %}
+  {% if not notices  and count < 1%}
         <h5 class="card-title text-center text-danger">No availlable Notices from your Faculty at the moment</h5>
+       {% elif not notices and count > 0%}
+       <h5 class="card-title text-center text-info">You have {{count}} unread notices, please read them.</h5>
+       
         {% else %}
     <table class="table table-hover table-lg">
       <thead>
@@ -38,7 +45,7 @@
           <th>Posted on</th>
           <th>Expiry date</th>
 
-          <th>Status</th>
+          {% comment %} <th>Status</th> {% endcomment %}
         </tr>
       </thead>
       <tbody>
@@ -47,25 +54,24 @@
         {% for notice in notices %}
        
           <tr>
-            <td>{{ notice.topic }} </td>
-            <td>{{ notice.created_on }}</td>
-            <td> {{ notice.due_date }}</td>
+            <td>{{ notice.notices.topic }} </td>
+            <td>{{ notice.notices.created_on }}</td>
+            <td> {{ notice.notices.due_date }}</td>              
+             
+              {% comment %} <td> <img src="{% static 'images/info.gif' %}" alt=""> </td> {% endcomment %}
+            
 
-
-
-              <td> <img src="{% static 'images/info.gif' %}" alt=""> </td>
-
-
-
-            <td><a href="{% url 'read_notice_details' notice.id%}" class="btn btn-primary btn-sm">Read Details</a></td>
+            <td><a href="{% url 'read_notice_details' notice.notices.id%}" class="btn btn-primary btn-sm">Read Details</a></td>
 
           </tr>
 
-         
-          
+        
          
         {% endfor %}
         {% endif %}
+
+        
+
       </tbody>
     </table>
       </div>
@@ -75,5 +81,5 @@
   </div>
 
 </div>
-</br></br>
+<br/><br/>
 {% endblock content%}

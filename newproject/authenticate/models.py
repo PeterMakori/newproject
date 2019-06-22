@@ -138,3 +138,4 @@ class Notices(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField(auto_now_add=False)
+    read_by = models.ManyToManyField(User, null=True, blank=True, related_name= 'read_by')

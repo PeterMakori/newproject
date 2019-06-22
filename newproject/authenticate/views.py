@@ -215,21 +215,46 @@ def feedback(request):
 # 	template_name = 'authenticate/noticedetails.html'
 
 def faculty_notice(request):
+	# control = False
 	today = date.today()
-	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')
-	return render(request,'authenticate/facultynotice.html', {'notices':notices} )
+	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
+	print(read)
+	count_unread = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_dean =True).filter(posted_by__faculty=request.user.faculty).order_by('-created_on').count()
+	print(count_unread)	
+	notices = Notices.read_by.through.objects.filter(user=request.user).filter(notices__due_date__gte=today).filter(notices__posted_by__is_dean =True).filter(notices__posted_by__faculty=request.user.faculty).order_by('-notices__created_on')
+	return render(request,'authenticate/facultynotice.html', {'notices':notices, 'count':count_unread})
+def unread_faculty_notice(request):
+	# control = False
+	today = date.today()
+	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
+	notices = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_dean =True).filter(posted_by__faculty=request.user.faculty).order_by('-created_on')
+	return render(request,'authenticate/unreadnotices.html', {'notices':notices})
 
 def faculty_notice_details(request, pk):
 	notice = Notices.objects.get(pk=pk)
+	notice.read_by.add(request.user)
 	return render(request,'authenticate/facultynoticedetails.html', {'notice':notice})
 
 def department_notice(request):
 	today = date.today()
-	notices = Notices.objects.filter(due_date__gte=today).filter(posted_by__is_cod =True).filter( posted_by__department=request.user.department).order_by('-created_on')
-	return render(request,'authenticate/department_notice.html', {'notices':notices} )
+	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
+	print(read)
+	count_unread = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_cod =True).filter(posted_by__department=request.user.department).order_by('-created_on').count()
+	print(count_unread)	
+	notices = Notices.read_by.through.objects.filter(user=request.user).filter(notices__due_date__gte=today).filter(notices__posted_by__is_cod =True).filter(notices__posted_by__department=request.user.department).order_by('-notices__created_on')
+	return render(request,'authenticate/department_notice.html', {'notices':notices, 'count':count_unread})
+	
+
+def unread_department_notice(request):
+	# control = False
+	today = date.today()
+	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
+	notices = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_cod =True).filter(posted_by__department=request.user.department).order_by('-created_on')
+	return render(request,'authenticate/unreadnoticedept.html', {'notices':notices})
 
 def department_notice_details(request, pk):
 	notice = Notices.objects.get(pk=pk)
+	notice.read_by.add(request.user)
 	return render(request,'authenticate/department_noticed_details.html', {'notice':notice})
 
 def view_Feedback(request):
@@ -254,7 +279,8 @@ def Search_Notices(request):
 	notices_from = request.GET.get('from')
 	notices_to = request.GET.get('to')
 	if notices_from == None or notices_to ==None:
-		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:1]
+		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:5]
+
 	else:
 		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
 		notices_to = datetime.strptime(notices_to, "%Y-%m-%d").date()

@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'newproject.wsgi.application'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'enoticeboard',
+         'NAME': 'Enoticeboard',
          'USER': 'makss',
          'PASSWORD': 'console',
          'HOST': 'localhost',

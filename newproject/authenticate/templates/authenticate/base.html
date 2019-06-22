@@ -147,7 +147,9 @@
 
 					  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					    <ul class="navbar-nav ml-auto">
-					        <a class="nav-link" href="{% url 'logout' %}"> <b> Logout </b></a>
+						
+						  	
+					        <a class="nav-link text-light" href="{% url 'logout' %}"> <i class="fas fa-power-off" style="font-size:22px; color:#c6cdd1"></i> Logout</a>
 					      </li>
 
 
@@ -212,23 +214,24 @@
 					<p> <b></b> </p> <br/>
 					{% if user.is_dean or user.is_cod %}
 					<li>
-							<a href="{% url 'createnotice' %}">Create Notice</a>
+							<a href="{% url 'createnotice' %}"><i class="fas fa-user-edit fa-lg"></i> Create Notice</a>
 					</li>
 
 
 					{% if user.is_dean %}
 					<li>
-							<a href="{% url 'viewfeedback' %}">Suggestion Box</a>
+							<a href="{% url 'viewfeedback' %}"> <i class="fas fa-inbox-in"></i> Suggestion Box</a>
 					</li>
 					{% else %}
 					<li>
-						<a href="{% url 'viewfeedbackdep' %}">Suggestion Box</a>
+						<a href="{% url 'viewfeedbackdep' %}"><i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
 				</li>
 				{% endif %}
 
 
 					<li>
-						<a href="{% url 'staffhelp' %}">Help</a>
+						<a href="{% url 'staffhelp' %}"> <i class="fas fa-question-circle"></i>
+Help </a>
 					</li>
 
 					{% endif %}
@@ -254,26 +257,24 @@
 							<a href="{% url 'search' %}">Search Notices</a>
 					</li>
 					<li>
-							<a href="{% url 'feedback' %}">Suggestion Box</a>
+							<a href="{% url 'feedback' %}"> <i class="fas fa-inbox"></i> Suggestion Box</a>
 					</li>
 
-
-
 					<li>
-							<a href="{% url 'studenthelp' %}">Help</a>
+							<a href="{% url 'studenthelp' %}"> <i class="fas fa-question-circle"></i> Help </a>
 					</li>
 					{% endif %}
 					<li>
-							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Profile</a>
+							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user"></i> Profile</a>
 							<ul class="collapse list-unstyled" id="pageSubmenu">
 									<li>
 											<a href="{% url 'viewprof' %}">View</a>
 									</li>
 									<li>
-											<a href="{% url 'edit_profile' %}">Edit</a>
+											<a href="{% url 'edit_profile' %}"><i class="fas fa-user-edit"></i> Edit</a>
 									</li>
 									<li>
-											<a href="{% url 'change_password' %}">Change Password</a>
+											<a href="{% url 'change_password' %}"><i class="fas fa-redo"></i> Change Password</a>
 									</li>
 							</ul>
 					</li>

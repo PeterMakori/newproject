@@ -91,4 +91,6 @@ admin.site.register(Notices)
 admin.site.register(Department)
 admin.site.register(Faculty)
 
-admin.site.site_header = 'Admin Portal'
+admin.site.site_header = 'NoticeBoard Portal'
+
+admin.site.index_title = "Welcome to E-Notice Board Portal"
