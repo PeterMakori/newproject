@@ -262,7 +262,7 @@ def view_Feedback(request):
 	return render(request,'authenticate/viewfeedback_fac.html', {'feedbacks':feedbacks} )
 
 def Feedback_Dep(request):
-	feedbacks = SendFeedback.objects.filter(to_department =True).filter(depart__department=request.user.department).order_by('-sent_on')
+	feedbacks = SendFeedback.objects.filter(to_department =True).filter(to_faculty=False).filter(depart__department=request.user.department).order_by('-sent_on')
 	return render(request,'authenticate/viewfeedback_dep.html', {'feedbacks':feedbacks} )
 
 def Feedbackdept_Details(request, pk):
@@ -279,17 +279,18 @@ def Search_Notices(request):
 	notices_from = request.GET.get('from')
 	notices_to = request.GET.get('to')
 	if notices_from == None or notices_to ==None:
-		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:5]
+		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:3]
 
 	else:
 		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
 		notices_to = datetime.strptime(notices_to, "%Y-%m-%d").date()
 		
 		notices_available = Notices.objects.filter(due_date__gte=notices_from).filter(due_date__lte=notices_to).filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')
-
+		
 	context = {'notices_available':notices_available}
 	return render(request, 'authenticate/search.html', context)
 
 def search_notice_details(request, pk):
 	search = Notices.objects.get(pk=pk)
+	search.read_by.add(request.user)
 	return render(request,'authenticate/search_noticed_details.html', {'search':search})
