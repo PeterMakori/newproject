@@ -28,7 +28,7 @@
                 </div>
 <div class="card-body">
 {% if count > 0 %}
- <a href="{% url 'unread_view_notices' %}" class="btn btn-primary btn-sm text-left ml-auto">{{ count }} Unread Notices</a>
+ <a href="{% url 'unread_view_notices' %}" class="btn btn-primary btn-sm text-left ml-auto"> <b class ="text-warning"> {{ count }} </b> Unread Notices</a>
  <img src="{% static 'images/info.gif' %}" alt="">
 {% endif %}
 
@@ -43,7 +43,8 @@
         <tr>
           <th>Topic</th>
           <th>Posted on</th>
-          <th>Expiry date</th>
+          <th>Due date</th>
+          <th>Status</th>
 
           {% comment %} <th>Status</th> {% endcomment %}
         </tr>
@@ -56,7 +57,8 @@
           <tr>
             <td>{{ notice.notices.topic }} </td>
             <td>{{ notice.notices.created_on }}</td>
-            <td> {{ notice.notices.due_date }}</td>              
+            <td> {{ notice.notices.due_date }}</td>
+            <td> Read </td>               
              
               {% comment %} <td> <img src="{% static 'images/info.gif' %}" alt=""> </td> {% endcomment %}
             

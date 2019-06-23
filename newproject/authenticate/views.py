@@ -79,10 +79,10 @@ def register_user(request):
 @login_required
 def view_prof(request):
 	return render(request, 'authenticate/viewprof.html', {})
-
+@login_required
 def find_help(request):
 	return render(request, 'authenticate/help.html', {})
-
+@login_required
 def search_help(request):
 	return render(request, 'authenticate/staff_help.html', {})
 
@@ -262,7 +262,7 @@ def view_Feedback(request):
 	return render(request,'authenticate/viewfeedback_fac.html', {'feedbacks':feedbacks} )
 
 def Feedback_Dep(request):
-	feedbacks = SendFeedback.objects.filter(to_department =True).filter(to_faculty=False).filter(depart__department=request.user.department).order_by('-sent_on')
+	feedbacks = SendFeedback.objects.filter(to_department =True).filter(depart__department=request.user.department).order_by('-sent_on')
 	return render(request,'authenticate/viewfeedback_dep.html', {'feedbacks':feedbacks} )
 
 def Feedbackdept_Details(request, pk):
@@ -270,7 +270,7 @@ def Feedbackdept_Details(request, pk):
 	return render(request,'authenticate/deptfeeddetails.html', {'feedback':feedback})
 
 
-def Feedback_Details(request,pk):
+def Feedbackfac_Details(request,pk):
 	feedback = SendFeedback.objects.get(pk=pk)
 	return render(request,'authenticate/facultyfeeddetails.html', {'feedback':feedback})
 
@@ -294,3 +294,22 @@ def search_notice_details(request, pk):
 	search = Notices.objects.get(pk=pk)
 	search.read_by.add(request.user)
 	return render(request,'authenticate/search_noticed_details.html', {'search':search})
+
+def Dean_Search_Notices(request):
+	notices_from = request.GET.get('from')
+	notices_to = request.GET.get('to')
+	if notices_from == None or notices_to ==None:
+		
+		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:3]
+
+	else:
+		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
+		notices_to = datetime.strptime(notices_to, "%Y-%m-%d").date()
+		countprint = Notices.objects.all().count()
+		notices_available = Notices.objects.filter(due_date__gte=notices_from).filter(due_date__lte=notices_to).filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')
+		
+	context = {'notices_available':notices_available}
+	return render(request, 'authenticate/noticereport.html', context)
+
+def Dean_Print(request):
+	return render(request, 'authenticate/noticereport.html', {})

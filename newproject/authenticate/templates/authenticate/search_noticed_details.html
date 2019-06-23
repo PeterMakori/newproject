@@ -20,10 +20,10 @@
 <div class="card">
   <div class="card-header text-center">
 
-  Notice Details
+   Faculty of {{ search.posted_by.faculty }} Notice 
   </div>
   <div class="card-body">
-    Posted By Faculty / Department of: {{ search.posted_by.faculty }}
+    From Dean
     <hr>
     <h5 class="h5 mt-4"><strong> Date Posted</strong></h5>
     <p class="h6"> {{ search.created_on }}</p>
@@ -31,7 +31,7 @@
     <p class="h6"> {{ search.topic }}</p> 
     <h5 class="h5 mt-4"><strong>Notice</strong></h5>
     <p class="h6"> {{ search.notice }}</p>
-    <h5 class="h5 mt-4"><strong>Expiry Date</strong></h5>
+    <h5 class="h5 mt-4"><strong>Due Date</strong></h5>
     <p class="h6"> {{ search.due_date }}</p>
   </div>
 

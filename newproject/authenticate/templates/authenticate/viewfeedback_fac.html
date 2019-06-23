@@ -25,8 +25,7 @@
       <div class="card">
             <div class="card-header">
 
-                <h4 class="card-title text-center"></h4>
-
+                <h4 class="card-title text-center"> Faculty of {{ user.faculty }}</h4> 
                 </div>
 <div class="card-body">
     <table class="table">
@@ -37,7 +36,7 @@
           <th>Sent By</th>
           <th>Subject</th>
           <th>Sent On</th>
-          <th>Status</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -52,7 +51,7 @@
             <td> {{ feedback.sent_on }}</td>
             
 
-              <td> <img src="{% static 'images/givef.gif' %}" alt=""> </td>
+             
 
             <td><a href="{% url 'read_feedback_details' feedback.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
 
@@ -69,6 +68,6 @@
 
 </div>
 
-</br></br>
+<br/><br/>
 
 {% endblock content%}

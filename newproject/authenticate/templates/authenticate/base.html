@@ -24,6 +24,15 @@
 	#id_password2{
 			margin-top: 14px;
 	}
+
+	
+	#id_id_send_to_0_1{
+				margin-left: -42px;
+				
+		}
+
+
+
 	input {
 	  border: 1px solid transparent;
 	  background-color: #f1f1f1;
@@ -216,22 +225,27 @@
 					<li>
 							<a href="{% url 'createnotice' %}"><i class="fas fa-user-edit fa-lg"></i> Create Notice</a>
 					</li>
-
+					
 
 					{% if user.is_dean %}
 					<li>
-							<a href="{% url 'viewfeedback' %}"> <i class="fas fa-inbox-in"></i> Suggestion Box</a>
+							<a href="{% url 'viewfeedbackfac' %}"> <i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
+					</li>
+					<li>
+							<a href="{% url 'reports' %}">Print Reports</a>
 					</li>
 					{% else %}
 					<li>
 						<a href="{% url 'viewfeedbackdep' %}"><i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
 				</li>
+				<li>
+							<a href="{% url 'reports' %}">Print Reports</a>
+					</li>
 				{% endif %}
 
 
 					<li>
-						<a href="{% url 'staffhelp' %}"> <i class="fas fa-question-circle"></i>
-Help </a>
+						<a href="{% url 'staffhelp' %}"> <i class="fas fa-question-circle"></i>Help </a>
 					</li>
 
 					{% endif %}
