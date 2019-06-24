@@ -1,4 +1,5 @@
 {% extends 'authenticate/base.html' %}
+{% load staticfiles %}
 
 
 <!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
@@ -10,7 +11,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.is_student %}
 
 
 <div class="row">
@@ -23,55 +24,76 @@
               
 
                 </div>
-                </div>
-                </div>
+            <div class="card-body">
 
+         <!------MENU SECTION START-->
 
-
-
+<!-- MENU SECTION END-->
+    <div class="content-wrapper">
+         <div class="container">
+        <div class="row pad-botm">
+            <div class="col-md-12">
+                <h4 class="header-line"> Student Dashboard</h4>
                 
-                
+                            </div>
+
+        </div>
+             
+             <div class="row">
 
 
 
-
-
+            
+                 <div class="col-md-5 col-sm-3 col-xs-6">
+                      <div class="alert alert-info back-widget-set text-center">
+                            
+      Faculty Notices
+                              
  
-
-   
-  
-
-   
+ {% if count > 0 %}
+ <h5 class="btn btn-primary btn-sm text-left ml-auto"> <b class ="text-warning"> {{ count }} </b> Unread Notices</h5>
+ <img src="{% static 'images/info.gif' %}" alt="">
 
 
+{% else %}
+ <h5 class="card-title text-center text-warning">No new Notices</h5>
+{% endif %}
+                    
+                        </div>
+                    </div>
+             
+               <div class="col-md-5 col-sm-4 col-xs-6">
+                      <div class="alert alert-info back-widget-set text-center">
+                            {% comment %} <i class="fa fa-recycle fa-5x"></i> {% endcomment %}
+                        
+                      
+                          Departmental Notices
+
+               {% if count > 0 %}
+ <h5 class="btn btn-primary btn-sm text-left ml-auto"> <b class ="text-warning"> {{ count }} </b> Unread Notices</h5>
+ <img src="{% static 'images/info.gif' %}" alt="">
 
 
+{% else %}
+ <h5 class="card-title text-center text-warning">No new Notices</h5>
+{% endif %}
+                        </div>
+                    </div>
+        </div>
 
 
+            
+    </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
   </div>
-  </div>
-
-
-
-
+ 
 
 {% else %}
 
   <!-- Masthead -->
-    <header class="masthead text-white text-center">
+    {% comment %} <header class="masthead text-white text-center">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -83,10 +105,10 @@
           </div>
         </div>
       </div>
-    </header>
+    </header> {% endcomment %}
 
     <!-- Icons Grid -->
-    <section class="features-icons bg-light text-center">
+    {% comment %} <section class="features-icons bg-light text-center">
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
@@ -118,10 +140,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> {% endcomment %}
 
     <!-- Image Showcases -->
-    <section class="showcase">
+    {% comment %} <section class="showcase">
       <div class="container-fluid p-0">
         <div class="row no-gutters">
 
@@ -146,10 +168,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> {% endcomment %}
 
     <!-- Call to Action -->
-    <section class="call-to-action text-white text-center">
+    {% comment %} <section class="call-to-action text-white text-center">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -174,7 +196,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> {% endcomment %}
 
     {% endif %}
 

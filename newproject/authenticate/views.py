@@ -19,6 +19,9 @@ def Signup(request):
 def home(request):
 	return render(request, 'authenticate/home.html', {})
 
+def homestaff(request):
+	return render(request, 'authenticate/home2.html', {})
+
 def about(request):
 	return render(request, 'authenticate/about.html', {})
 
@@ -49,9 +52,15 @@ def login_user(request):
 		password = request.POST['password']
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
+
 			login(request, user)
+			if user.is_student:
+				return redirect('home')
+			else:
+				return redirect('home2')
+			
 			# messages.success(request, ('You Have Been Logged In!'))
-			return redirect('home')
+			# return redirect('home')
 		else:
 			messages.success(request, ('Username or Password Wrong. Please Try Again!'))
 			return redirect('login')
@@ -88,7 +97,7 @@ def search_help(request):
 
 def logout_user(request):
 	logout(request)
-	return redirect('home')
+	return redirect('login')
 
 
 @login_required
@@ -313,3 +322,5 @@ def Dean_Search_Notices(request):
 
 def Dean_Print(request):
 	return render(request, 'authenticate/noticereport.html', {})
+
+	

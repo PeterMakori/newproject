@@ -6,8 +6,9 @@ from django.conf.urls import url
 
 urlpatterns = [
 
-    path('login/', views.login_user, name="login"),
-    path('', views.home, name="home"),
+    path('', views.login_user, name="login"),
+    path('student/dashboard', views.home, name="home"),
+    path('staff/dashboard', views.homestaff, name="home2"),
     path('register/', views.register_user, name='register'),
     path('help/', views.find_help, name='studenthelp'),
     path('staff/help/', views.search_help, name='staffhelp'),
