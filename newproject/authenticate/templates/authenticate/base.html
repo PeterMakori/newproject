@@ -118,7 +118,7 @@
 <link rel="stylesheet" href="{%  static 'bootstrap/css/main.css' %}">
 <link rel="stylesheet" href="{%  static 'bootstrap/css/sidebar.css' %}">
 <link rel="stylesheet" href="{%  static 'bootstrap/css/datepicker.css' %}">
-{% comment %} <link rel="stylesheet" href="{%  static 'bootstrap/css/font-awesome.css' %}"> {% endcomment %}
+<link rel="stylesheet" href="{%  static 'bootstrap/css/font-awesome.css' %}">
 <link rel="stylesheet" href="{%  static 'bootstrap/css/styledash.css' %}">
 
 <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
@@ -231,7 +231,7 @@
 					<p> <b></b> </p> <br/>
 					{% if user.is_dean or user.is_cod %}
 					<li>
-							<a href="{% url 'createnotice' %}"><i class="fas fa-user-edit fa-lg"></i> Create Notice</a>
+							<a href="{% url 'createnotice' %}"><i class="fas fa-edit fa-lg"></i> Create Notice</a>
 					</li>
 					
 
@@ -240,20 +240,20 @@
 							<a href="{% url 'viewfeedbackfac' %}"> <i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
 					</li>
 					<li>
-							<a href="{% url 'reports' %}">Print Reports</a>
+							<a href="{% url 'reports' %}"> <i class="fas fa-print fa-lg"></i> Print Reports</a>
 					</li>
 					{% else %}
 					<li>
 						<a href="{% url 'viewfeedbackdep' %}"><i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
 				</li>
 				<li>
-							<a href="{% url 'reports' %}">Print Reports</a>
+							<a href="{% url 'reports' %}"> <i class="fas fa-print fa-lg"></i> Print Reports</a>
 					</li>
 				{% endif %}
 
 
 					<li>
-						<a href="{% url 'staffhelp' %}"> <i class="fas fa-question-circle"></i>Help </a>
+						<a href="{% url 'staffhelp' %}"> <i class="fas fa-question-circle fa-lg"></i>Help </a>
 					</li>
 
 					{% endif %}
@@ -262,7 +262,7 @@
 
 
 					<li class="active">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Notices</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <i class="fas fa-scroll fa-lg"></i> View Notices</a>
 							<ul class="collapse list-unstyled" id="homeSubmenu">
 									<li>
 											<a href="{% url 'view_notices' %}">Faculty</a>
@@ -276,27 +276,27 @@
 					</li>
 
 					<li>
-							<a href="{% url 'search' %}">Search Notices</a>
+							<a href="{% url 'search' %}"> <i class="fas fa-search fa-lg"></i> Search Notices</a>
 					</li>
 					<li>
-							<a href="{% url 'feedback' %}"> <i class="fas fa-inbox"></i> Suggestion Box</a>
+							<a href="{% url 'feedback' %}"> <i class="fas fa-inbox fa-lg"></i> Suggestion Box</a>
 					</li>
 
 					<li>
-							<a href="{% url 'studenthelp' %}"> <i class="fas fa-question-circle"></i> Help </a>
+							<a href="{% url 'studenthelp' %}"> <i class="fas fa-question-circle fa-lg"></i> Help </a>
 					</li>
 					{% endif %}
 					<li>
-							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user"></i> Profile</a>
+							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user fa-lg"></i> Profile</a>
 							<ul class="collapse list-unstyled" id="pageSubmenu">
 									<li>
 											<a href="{% url 'viewprof' %}">View</a>
 									</li>
 									<li>
-											<a href="{% url 'edit_profile' %}"><i class="fas fa-user-edit"></i> Edit</a>
+											<a href="{% url 'edit_profile' %}"><i class="fas fa-user-edit fa-lg"></i> Edit</a>
 									</li>
 									<li>
-											<a href="{% url 'change_password' %}"><i class="fas fa-redo"></i> Change Password</a>
+											<a href="{% url 'change_password' %}"><i class="fas fa-redo fa-lg"></i> Change Password</a>
 									</li>
 							</ul>
 					</li>
