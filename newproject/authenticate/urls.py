@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^search/notices/', views.Search_Notices, name="search"),
      url(r'^reports/notices/dean', views.Dean_Search_Notices, name="reports"),
     path('search/notice/<pk>/',views.search_notice_details, name="read_search_details"),
-    path('reports/notices/', views.Dean_Print, name="printreports"),
+    path('reports/notices/cod', views.Cod_Search_Notices, name="codprintreports"),
     
 
 
