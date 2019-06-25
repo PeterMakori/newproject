@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^department/unread/notices/', views.unread_department_notice, name="unread_department_notices"),
     path('department/notice/<pk>/',views.department_notice_details, name="read_department_notice"),
     url(r'^search/notices/', views.Search_Notices, name="search"),
-     url(r'^reports/notices/', views.Dean_Search_Notices, name="reports"),
+     url(r'^reports/notices/dean', views.Dean_Search_Notices, name="reports"),
     path('search/notice/<pk>/',views.search_notice_details, name="read_search_details"),
     path('reports/notices/', views.Dean_Print, name="printreports"),
     

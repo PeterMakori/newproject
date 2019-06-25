@@ -1,60 +1,29 @@
 {% extends 'authenticate/base.html' %}
 
 
-<!-- <h2 class="text-center" style = "margin-top:200px"> <b> Some contents of landing page... </b></h2> -->
-
 {% block title %}
 <title>E-NoticeBoard</title>
 
 {% endblock %}
 
-{% load crispy_forms_tags %}
 
 {% block content %}
 
 
 <div style="margin-left:390px;">
     <br>
-    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'search' %}" method="get">
-        
+    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'reports' %}" method="get">
+        {% csrf_token %}
         <input class="form-control form-control-lg ml-3 w-15" type="text" id= "from1" name="from" placeholder="From" autocomplete="off" readonly="readonly" required>
-
+  
         
-        <script type="text/javascript">
-
-            $(document).ready(function(){
-
-
-                $("#from1").datepicker({
-                    numberOfMonth:1,
-                    format: 'yyyy-mm-dd',
-                    todayHighlight:true,
-                    autoclose:true,
-
-                });
-
-            })
-        </script>
+       
         
         <input class="form-control form-control-lg ml-3 w-10" type="text"  name="to" placeholder="To" id="to1" autocomplete="off" readonly="readonly" required>
         <div style="margin-left:7px;">
         <i class="fas fa-search" aria-hidden="true"></i>
       </div>
-        <script type="text/javascript">
-
-            $(document).ready(function(){
-
-
-                $("#to1").datepicker({
-                    numberOfMonth:1,
-                    format: 'yyyy-mm-dd',
-                    todayHighlight:true,
-                    autoclose:true,
-
-                });
-
-            })
-        </script>
+       
 
 
     <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -64,59 +33,100 @@
     </div>
     <br/>
 
-    <div class="row">
-        <!-- <div class="col col-md-7 offset-md-3"> -->
+    
+
+  <div class="row">
+       
       
           <div class="col-md-8 offset-md-3">
             <div class="card">
                   <div class="card-header">
       
-                      <h4 class="card-title text-center"> Notices</h4>
+                      <h4 class="card-title text-center"> Faculty Notices</h4>
                       
       
       
                       </div>
-
-        {% if notices_available %}
-        <div class="container">
-        
-             
-            <div class="card-body">
-             
-            <a href="{% url 'printreports' %}" class="btn btn-secondary btn-sm  text-light float-right"> Print</a>
+ 
+<table id="dtBasicExample" class="table  table-bordered table-responsive-md" cellspacing="0" width="100%">
+	<thead class="text-dark" style="background-color: rgb(119,136,153);">
+		
+			<!-- <th><b>Period</b></th> -->
+			
             
+             
+             <th>Topic</th>             
+              <th>Created On</th>
+              <th>Due Date</th>
+              <th>Posted By</th>
+             
 
-
-                <table class="table table-hover table-lg">
-       
-                  <thead class="thead-blue">
-                    <tr>
-                      <th>Topic</th>
-                      <th>Posted On</th>
-                      <th>Due Date</th>
-                      </tr>
-                  </thead>
-                    <tbody>
-            {% for notices in notices_available %}
-            <tr>
+      
+	</thead>
+	<tbody>
+		{% for notices in notices_available %}
+		<tr>
+                
                 <td>{{ notices.topic }} </td>
+                
                 <td>{{ notices.created_on }}</td>
                 <td> {{ notices.due_date }}</td>
-                <td><a href="{% url 'read_search_details' notices.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
-            </tr>
-            {% endfor %}
-  
-                  </tbody>
-                  
-                </table>
+                <td> {{ notices.posted_by_id }}</td>
                 
-            </div>
-            
-            
-        {% endif %}
-      </div>
-        </div>
-  <br/> <br/>
-   
+                
+                
+            </tr>
+			
+		
+
+	
+		{% endfor %}
+		
+	</tbody>
+	
+		
+</table>
+ </div>
+ </div>
+
+ </div>
+
+
+
+
+ <script type="text/javascript">
+
+            $(document).ready(function(){
+
+
+                $("#from1").datepicker({
+                    numberOfMonth:1,
+                    format: 'yyyy-mm-dd',
+                    todayHighlight:true,
+
+                });
+
+            })
+                    autoclose:true,
+        </script>
+
+
+ <script type="text/javascript">
+
+            $(document).ready(function(){
+
+                $("#to1").datepicker({
+                    numberOfMonth:1,
+                    format: 'yyyy-mm-dd',
+                    todayHighlight:true,
+
+                    autoclose:true,
+
+                });
+
+            })
+        </script>
+
+  
 
 {% endblock content%}
