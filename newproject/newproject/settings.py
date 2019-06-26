@@ -82,11 +82,14 @@ WSGI_APPLICATION = 'newproject.wsgi.application'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'Enoticeboard',
-         'USER': 'makss',
-         'PASSWORD': 'console',
-         'HOST': 'localhost',
+         'NAME': 'Petermakss$enoticeboard',
+         'USER': 'Petermakss',
+         'PASSWORD': 'consolepassword',
+         'HOST': 'Petermakss.mysql.pythonanywhere-services.com',
          'PORT': '3306'
+        #  'OPTIONS': {
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        # },
      }
  }
 
