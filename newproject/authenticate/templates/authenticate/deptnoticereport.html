@@ -2,7 +2,7 @@
 
 
 {% block title %}
-<title> Faculty of {{ user.faculty }} Notices</title>
+<title>{{ user.department }} Department Notices</title>
 
 {% endblock %}
 
@@ -12,7 +12,7 @@
 
 <div style="margin-left:375px;">
     <br>
-    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'reports' %}" method="get">
+    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'codprintreports' %}" method="get">
         {% csrf_token %}
         <input class="form-control form-control-lg ml-3 w-15" type="text" id= "from1" name="from" placeholder="From" autocomplete="off" readonly="readonly" required>
   
@@ -42,13 +42,13 @@
             <div class="card">
                   <div class="card-header">
       
-                      <h4 class="card-title text-center"> Faculty of {{ user.faculty }} Notices</h4>
+                      <h4 class="card-title text-center"> {{ user.department }} Department Notices</h4>
                       
       
       
                       </div>
  
-<table  id="dtBasicExample" class="table  table-bordered table-responsive-md" cellspacing="0" width="100%">
+<table id="dtBasicExample" class="table  table-bordered table-responsive-md" cellspacing="0" width="100%">
 	<thead class="text-dark" style="background-color: rgb(119,136,153);">
 		
 			<!-- <th><b>Period</b></th> -->
@@ -65,7 +65,7 @@
 	</thead>
 	<tbody>
 		{% for notices in notices_available %}
-		<tr class="table table-bordered table-hover">
+		<tr>
                 
                 <td class="text-center">{{ notices.topic }} </td>
                 

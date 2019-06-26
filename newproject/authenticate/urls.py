@@ -37,6 +37,8 @@ urlpatterns = [
      url(r'^reports/notices/dean', views.Dean_Search_Notices, name="reports"),
     path('search/notice/<pk>/',views.search_notice_details, name="read_search_details"),
     path('reports/notices/cod', views.Cod_Search_Notices, name="codprintreports"),
+    path('reports/suggestions/faculty', views.Dean_Search_Feedback, name="facultyfeedreports"),
+     path('reports/suggestions/department', views.Cod_Print_Feedback, name="departmentfeedreports"),
     
 
 

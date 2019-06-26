@@ -111,8 +111,8 @@ class User(AbstractBaseUser):
 class SendFeedback(models.Model):
     sent_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     type = models.CharField(max_length=100)
-    subject = models.CharField(max_length=70)
-    message = models.TextField(max_length=255)
+    subject = models.CharField(max_length=200)
+    message = models.TextField(max_length=400)
     sent_on = models.DateTimeField(auto_now_add=True)
     to_faculty = models.BooleanField(default=False)
     to_department = models.BooleanField(default=False)
@@ -134,7 +134,7 @@ class SendFeedback(models.Model):
 class Notices(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     topic = models.CharField(max_length=100)
-    notice = models.TextField(max_length=900)
+    notice = models.TextField(max_length=1000)
     last_modified = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField(auto_now_add=False)

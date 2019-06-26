@@ -2,7 +2,7 @@
 
 
 {% block title %}
-<title> Faculty of {{ user.faculty }} Notices</title>
+<title> Department of {{ user.department }} Suggestion Box</title>
 
 {% endblock %}
 
@@ -12,7 +12,7 @@
 
 <div style="margin-left:375px;">
     <br>
-    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'reports' %}" method="get">
+    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'departmentfeedreports' %}" method="get">
         {% csrf_token %}
         <input class="form-control form-control-lg ml-3 w-15" type="text" id= "from1" name="from" placeholder="From" autocomplete="off" readonly="readonly" required>
   
@@ -26,7 +26,7 @@
        
 
 
-    <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search By Due Date</button>
+    <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search By Date Sent</button>
   
 
     </form>
@@ -42,45 +42,39 @@
             <div class="card">
                   <div class="card-header">
       
-                      <h4 class="card-title text-center"> Faculty of {{ user.faculty }} Notices</h4>
+                      <h4 class="card-title text-center"> Department of {{ user.department }}</h4> 
                       
       
       
                       </div>
  
-<table  id="dtBasicExample" class="table  table-bordered table-responsive-md" cellspacing="0" width="100%">
+<table  id="facufeeds" class="table  table-bordered table-responsive-md" cellspacing="0" width="100%">
 	<thead class="text-dark" style="background-color: rgb(119,136,153);">
 		
 			<!-- <th><b>Period</b></th> -->
 			
             
              
-             <th class="text-center">Topic</th>             
-              <th class="text-center">Created On</th>
-              <th class="text-center">Due Date</th>
-              <th class="text-center">Posted By</th>
+             <th class="text-center">Type</th>             
+              <th class="text-center">Sent By</th>
+              <th class="text-center">Sent On</th>
              
 
       
 	</thead>
 	<tbody>
-		{% for notices in notices_available %}
+		{% for depfeeds in codfeeds_available %}
 		<tr class="table table-bordered table-hover">
                 
-                <td class="text-center">{{ notices.topic }} </td>
-                
-                <td class="text-center">{{ notices.created_on }}</td>
-                <td class="text-center"> {{ notices.due_date }}</td>
-                <td class="text-center"> {{ notices.posted_by_id }}</td>
-                
-                
+                <td class="text-center">{{ depfeeds.type }} </td>
+                <td class="text-center">{{ depfeeds.sent_by }}</td>
+                <td class="text-center"> {{ depfeeds.sent_on }}</td>               
                 
             </tr>
-			
-		
-
 	
 		{% endfor %}
+
+        
 		
 	</tbody>
 	

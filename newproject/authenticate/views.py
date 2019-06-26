@@ -9,6 +9,7 @@ from django.views.generic import CreateView,TemplateView,ListView,DetailView
 from authenticate.models import User,Notices,SendFeedback
 from django.utils.decorators import method_decorator
 from datetime import datetime, date
+import xlrd
 
 
 # Create your views here.
@@ -232,6 +233,7 @@ def faculty_notice(request):
 	print(count_unread)	
 	notices = Notices.read_by.through.objects.filter(user=request.user).filter(notices__due_date__gte=today).filter(notices__posted_by__is_dean =True).filter(notices__posted_by__faculty=request.user.faculty).order_by('-notices__created_on')
 	return render(request,'authenticate/facultynotice.html', {'notices':notices, 'count':count_unread})
+	
 def unread_faculty_notice(request):
 	# control = False
 	today = date.today()
@@ -309,7 +311,7 @@ def Dean_Search_Notices(request):
 	notices_to = request.GET.get('to')
 	if notices_from == None or notices_to ==None:
 		
-		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:3]
+		notices_available = Notices.objects.filter(posted_by__is_dean =True).filter( posted_by__faculty=request.user.faculty).order_by('-created_on')[:2]
 
 	else:
 		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
@@ -320,7 +322,78 @@ def Dean_Search_Notices(request):
 	context = {'notices_available':notices_available}
 	return render(request, 'authenticate/noticereport.html', context)
 
-def Dean_Print(request):
-	return render(request, 'authenticate/noticereport.html', {})
+def Cod_Search_Notices(request):
+	notices_from = request.GET.get('from')
+	notices_to = request.GET.get('to')
+	if notices_from == None or notices_to ==None:
+		
+		notices_available = Notices.objects.filter(posted_by__is_cod =True).filter( posted_by__department=request.user.department).order_by('-created_on')[:2]
+
+	else:
+		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
+		notices_to = datetime.strptime(notices_to, "%Y-%m-%d").date()
+		# countprint = Notices.objects.all().count()
+		notices_available = Notices.objects.filter(due_date__gte=notices_from).filter(due_date__lte=notices_to).filter(posted_by__is_cod =True).filter( posted_by__department=request.user.department).order_by('-created_on')
+		
+	context = {'notices_available':notices_available}
+	return render(request, 'authenticate/deptnoticereport.html', context)
+
+
+def Dean_Search_Feedback(request):
+	feeds_from = request.GET.get('from')
+	feeds_to = request.GET.get('to')
+	if feeds_from == None or feeds_to ==None:
+		feeds_available = SendFeedback.objects.filter(to_faculty =True).filter(facult__faculty=request.user.faculty).order_by('-sent_on')[:2]
+
+	else:
+
+		feeds_from = datetime.strptime(feeds_from, "%Y-%m-%d").date()
+		feeds_to = datetime.strptime(feeds_to, "%Y-%m-%d").date()
+		countprint = SendFeedback.objects.all().count()
+		feeds_available = SendFeedback.objects.filter(sent_on__gte=feeds_from).filter(sent_on__lte=feeds_to).filter(to_faculty =True).filter( facult__faculty=request.user.faculty).order_by('-sent_on')
+	return render(request,'authenticate/reportfeeds_fac.html', {'feeds_available':feeds_available} )
+
+
+def Cod_Print_Feedback(request):
+	codfeeds_from = request.GET.get('from')
+	codfeeds_to = request.GET.get('to')
+	if codfeeds_from == None or codfeeds_to ==None:
+		codfeeds_available = SendFeedback.objects.filter(to_department =True).filter(depart__department=request.user.department).order_by('-sent_on')[:2]
+
+	else:
+
+		codfeeds_from = datetime.strptime(codfeeds_from, "%Y-%m-%d").date()
+		codfeeds_to = datetime.strptime(codfeeds_to, "%Y-%m-%d").date()
+		countprint = SendFeedback.objects.all().count()
+		codfeeds_available = SendFeedback.objects.filter(sent_on__gte=codfeeds_from).filter(sent_on__lte=codfeeds_to).filter(to_department =True).filter( depart__department=request.user.department).order_by('-sent_on')
+	return render(request,'authenticate/reportfeeds_department.html', {'codfeeds_available':codfeeds_available} )
+
+def handle_uploaaded_file(request, f):
+	book = xlrd.open_workbook(file_read())
+	for sheet in book.sheets():
+		number_of_rows = sheet.number_of_rows
+		number_of_columns = sheet.number_of_columns
+
+		for row in range(1, number_of_rows):
+			department = (sheet.cell(row, 0).value)
+			registration_no = (sheet.cell(row, 0).value)
+			first_name = (sheet.cell(row, 0).value)
+			last_name = (sheet.cell(row, 0).value)
+
+			user = User()
+			user.username = registration_no
+			user.password = make_password(registration_no, salt = None, hasher = 'default')
+			user.first_name = first_name
+			user.last_name = last_name
+			user.is_student = True
+			user.save()
+
+			department1 = Department.objects.get(department_name = department)
+			
+def excel(request):
+	if request.method == 'POST':
+		handle_uploaaded_file(request, request.FILES)
+
+
 
 	

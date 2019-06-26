@@ -88,7 +88,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> {% endcomment %}
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/mdb.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/style.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/sidenav.css' %}">
@@ -246,12 +246,18 @@
 					<li>
 							<a href="{% url 'reports' %}"> <i class="fas fa-print fa-lg"></i> Print Reports</a>
 					</li>
+					<li>
+							<a href="{% url 'facultyfeedreports' %}"> <i class="fas fa-print fa-lg"></i> Print Suggetions</a>
+					</li>
 					{% else %}
 					<li>
 						<a href="{% url 'viewfeedbackdep' %}"><i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
 				</li>
-				<li>
-							<a href="#"> <i class="fas fa-print fa-lg"></i> Print Reports</a>
+					<li>
+							<a href="{% url 'codprintreports' %}"> <i class="fas fa-print fa-lg"></i> Print Reports</a>
+					</li>
+					<li>
+							<a href="{% url 'departmentfeedreports' %}"> <i class="fas fa-print fa-lg"></i> Print Suggestion</a>
 					</li>
 				{% endif %}
 
@@ -339,7 +345,7 @@
 
 	{% endblock %}
 
-	 <footer class="page-footer font-small blue">
+	 {% comment %} <footer class="page-footer font-small blue"> {% endcomment %}
 
 	   <!-- Copyright -->
 	   <footer class="text-center footer-copyright py-1 navbar-dark white-text fixed-bottom" style="background-color: #808080">© 2019 Copyright:
@@ -358,10 +364,10 @@
 	 <script type="text/javascript" src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'bootstrap/js/popper.min.js' %}"></script>
 	 <script type="text/javascript" src="{% static 'bootstrap/js/mdb.min.js' %}"></script>
-	 <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-	 <script type="text/javascript" src="{% static 'bootstrap/js/form.js' %}"></script>
+	 {% comment %} <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> {% endcomment %}
+	 {% comment %} <script type="text/javascript" src="{% static 'bootstrap/js/form.js' %}"></script> {% endcomment %}
 	 <script type="text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-	 <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+	 {% comment %} <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script> {% endcomment %}
 	 <script type="text/javascript" src="{% static 'bootstrap/js/custom.js' %}"></script>
 
 	 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -417,6 +423,17 @@
 		} );
 		</script>
 
+		<script>
+			$(document).ready(function() {
+			$("#facufeeds").DataTable( {
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			} );
+		} );
+		</script>
+
 	  
    
 
@@ -435,6 +452,7 @@
 											dateFormat: "yy-mm-dd",
 											maxDate: 0,
 											constrainInput: true,
+											
 									});
 								} );
 								</script>
@@ -458,13 +476,48 @@
 								} );
 								</script>
 
+		 <script>
+				function isValidDate(from1, to1) {
+            var fromdate, todate, dt1, dt2, mon1, mon2, yr1, yr2, date1, date2;
+            var chkFrom = document.getElementById(from1);
+            var chkTo = document.getElementById(to1);
+            if (trim(document.getElementById(from1).value, '') == '') {
+                alert('From date should not be empty');
+                document.getElementById(from1).value = '';
+                document.getElementById(from1).focus();
+                return false;
+            }
+            else if (trim(document.getElementById(to1).value, '') == '') {
+                alert('To date should not be empty');
+                document.getElementById(to1).value = '';
+                document.getElementById(to1).focus();
+                return false;
+            }
+           
+                }
+             
+                    
+
+					
+
+                    if (to1 <= from1) {
+                        alert("To date Should be greater than From date");
+                        document.getElementById(to1).value = '';
+                        document.getElementById(to1).focus();
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+</script>
 
 								<script>
 								var faculties = ["Agriculture","Arts and Sciences","Commerce","Education and Community Studies","Engineering and Technology",
 								"Environment and Resource Development", "Health Sciences","Law","Science","Veterinary Medicine and Surgery","Institute of Women Gender and Development Studies",
-							"College of Open and Distance Learning","Directorates"];
-								var departments = ["Economics","Languages, Literature and Linguistics","Peace Security and Social Studies","Philosophy, History and Religion",
-																	 "Business Administration; housing the disciplines of Human Resource Management, Marketing, Insurance and Strategic Management","Accounting, Finance and Managemen","Operation Research and Information Systems",
+							"College of Open and Distance Learning Directorates"];
+								var departments = ["Economics","Literature, Languages and Linguistics","Peace, Security and Social Studies","Philosophy, History and Religion",
+																	 "Business Administration; housing the disciplines of Human Resource Management, Marketing, Insurance and Strategic Management","Accounting, Finance and Management","Operation Research and Information Systems",
 																 "Agricultural Education and Extension","Applied Community and Development Studies","Psychology, Counseling and Educational Foundations and Curriculum","Instruction and Educational Management",
 																  "Agricultural Engineering (AGEN)","Civil and Environmental Engineering (CEEN)","Industrial and Energy Engineering (IEEN)","Electrical and Control Engineering (ECEN)",
 																"Environmental Science","Geography","Natural Resources",
