@@ -16,7 +16,7 @@
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-     min-height: 125%;   /*height of sidevar to edit */
+     min-height: 285%;   /*height of sidevar to edit */
     position: absolute;
 }
 a[data-toggle="collapse"] {
@@ -30,6 +30,7 @@ a[data-toggle="collapse"] {
     right: 20px;
     transform: translateY(-50%);
 }
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

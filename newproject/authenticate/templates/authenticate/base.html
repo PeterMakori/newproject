@@ -192,9 +192,9 @@
 												 <a class="nav-link" href="{% url 'home' %}"> <b>Home </b></a>
 
 													</li> {% endcomment %}
-																	<li class="nav-item">
+																	{% comment %} <li class="nav-item">
 													        <a class="nav-link" href="{% url 'login' %}"> <b>Login </b></a>
-																	</li>
+																	</li> {% endcomment %}
 
 
 
@@ -242,23 +242,40 @@
 					{% if user.is_dean %}
 					<li>
 							<a href="{% url 'viewfeedbackfac' %}"> <i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
-					</li>
+					
+					
 					<li>
-							<a href="{% url 'reports' %}"> <i class="fas fa-print fa-lg"></i> Print Reports</a>
+							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-print fa-lg"></i> Generate Reports</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu">
+									<li>
+											<a href="{% url 'reports' %}"> <i class="fas fa-print fa-lg"></i> Notices</a>
+									</li>
+									<li>
+											<a href="{% url 'facultyfeedreports' %}"> <i class="fas fa-print fa-lg"></i> Suggetions</a>
+									</li>
+									
+							</ul>
 					</li>
-					<li>
-							<a href="{% url 'facultyfeedreports' %}"> <i class="fas fa-print fa-lg"></i> Print Suggetions</a>
-					</li>
+
 					{% else %}
 					<li>
 						<a href="{% url 'viewfeedbackdep' %}"><i class="fas fa-envelope-open-text fa-lg"></i> Suggestion Box</a>
 				</li>
-					<li>
-							<a href="{% url 'codprintreports' %}"> <i class="fas fa-print fa-lg"></i> Print Reports</a>
+					
+						<li>
+							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-print fa-lg"></i> Generate Reports</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu">
+									<li>
+											<a href="{% url 'codprintreports' %}"> <i class="fas fa-print fa-lg"></i> Notices</a>
+									</li>
+									<li>
+											<a href="{% url 'departmentfeedreports' %}"> <i class="fas fa-print fa-lg"></i> Suggestions</a>
+									</li>
+									
+							</ul>
 					</li>
-					<li>
-							<a href="{% url 'departmentfeedreports' %}"> <i class="fas fa-print fa-lg"></i> Print Suggestion</a>
-					</li>
+
+					
 				{% endif %}
 
 

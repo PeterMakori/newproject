@@ -36,7 +36,7 @@
 </div>
 </div>
 <div class="row">
-  <div class="container col-md-4 offset-md-4 d-dlex flex-fill text-center text-black align-items-center">
+  <div class="container col-md-6 offset-md-3 d-dlex flex-fill text-center text-black align-items-center">
 
 
     <form action="{% url 'createnotice' %} " method="POST">
@@ -44,7 +44,7 @@
       {{ form | crispy }}
 
       <button type="submit" class="btn btn-primary">Create</button>
-    <br/>
+    <br/><br/>
     </form>
 
   </div>
@@ -56,6 +56,6 @@
 </div>
 </div>
 </main>
-</br></br>
+
 
 {% endblock %}

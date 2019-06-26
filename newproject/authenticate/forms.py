@@ -123,5 +123,5 @@ class NoticeForm(forms.ModelForm):
         model = Notices
         fields = ('topic','notice','due_date',)
         widgets = {
-            'notice': Textarea(attrs={'class':'form-control','cols':4, 'rows':5}),
+            'notice': Textarea(attrs={'class':'form-control','cols':12, 'rows':5}),
         }

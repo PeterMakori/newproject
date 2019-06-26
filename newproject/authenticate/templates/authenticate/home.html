@@ -20,7 +20,7 @@
       <div class="card">
             <div class="card-header">
 
-                <h5 class="card-title"><i> <b> Welcome </b> {{ user.first_name }} {{ user.last_name }} </i></h5>
+                <h5 class="card-title"><i> <b> Welcome </b> {{ user.first_name }} {{ user.last_name }}, {{ user.username }} </i></h5>
               
 
                 </div>
@@ -35,47 +35,65 @@
             <div class="col-md-12">
                 <h4 class="header-line"> Student Dashboard</h4>
                 
+                
                             </div>
+                            <br/>
+                            
 
         </div>
+        <br/>
+        <br/>
              
              <div class="row">
 
 
 
             
-                 <div class="col-md-5 col-sm-3 col-xs-6">
+                 <div class="col-md-6 col-sm-3 col-xs-6">
                       <div class="alert alert-info back-widget-set text-center">
+                      
+                       <br/>
                             
-      Faculty Notices
+     <h4> Faculty Notices</h4>
+     <br/>
+     
                               
  
- {% if count > 0 %}
- <h5 class="btn btn-primary btn-sm text-left ml-auto"> <b class ="text-warning"> {{ count }} </b> Unread Notices</h5>
+ {% if faccount_unread > 0 %}
+<a href="{% url 'unread_view_notices' %}" class="btn btn-primary btn-lg text-left ml-auto"> <b class ="text-warning"> {{ faccount_unread }} </b> Unread Notices</a>
  <img src="{% static 'images/info.gif' %}" alt="">
+ <br/>
+ <br/>
 
 
 {% else %}
- <h5 class="card-title text-center text-warning"></h5>
+<i class="fa fa-bars fa-5x"></i>
+<h5 class="card-title text-center text-info">No New Notice Availlable</h5>
+       
 {% endif %}
+
+
                     
                         </div>
                     </div>
              
-               <div class="col-md-5 col-sm-4 col-xs-6">
+               <div class="col-md-6 col-sm-4 col-xs-6">
                       <div class="alert alert-info back-widget-set text-center">
-                            {% comment %} <i class="fa fa-recycle fa-5x"></i> {% endcomment %}
+                            
+                            <br/>
                         
-                      
-                          Departmental Notices
+                    
+                          <h4> Departmental Notices</h4>
+                          <br/>
 
-               {% if count > 0 %}
- <h5 class="btn btn-primary btn-sm text-left ml-auto"> <b class ="text-warning"> {{ count }} </b> Unread Notices</h5>
+               {% if deptcount_unread > 0 %}
+ <a href="{% url 'unread_department_notices' %}" class="btn btn-primary btn-lg text-left ml-auto"> <b class ="text-warning"> {{ deptcount_unread }} </b> Unread Notices</a>
  <img src="{% static 'images/info.gif' %}" alt="">
 
 
 {% else %}
- <h5 class="card-title text-center text-warning"></h5>
+<i class="fa fa-bars fa-5x"></i>
+ <h5 class="card-title text-center text-info">No New Notice Availlable</h5>
 {% endif %}
                         </div>
                     </div>
@@ -92,111 +110,7 @@
 
 {% else %}
 
-  <!-- Masthead -->
-    {% comment %} <header class="masthead text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h2 class="mb-5">View the Departmental And Faculty Announcements from the Comfort of your Zone!</h2>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-
-          </div>
-        </div>
-      </div>
-    </header> {% endcomment %}
-
-    <!-- Icons Grid -->
-    {% comment %} <section class="features-icons bg-light text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-screen-desktop m-auto text-primary"></i>
-              </div>
-              <h3>Easy Acess</h3>
-              <p class="lead mb-0">View the Departmental And Faculty Announcements just from anywhere using your computer or phone!</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-layers m-auto text-primary"></i>
-              </div>
-              <h3></h3>
-              <p class="lead mb-0"> </p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-check m-auto text-primary"></i>
-              </div>
-              <h3>Easy to Use</h3>
-              <p class="lead mb-0">Simply create an account, login and you are ready to view the content!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> {% endcomment %}
-
-    <!-- Image Showcases -->
-    {% comment %} <section class="showcase">
-      <div class="container-fluid p-0">
-        <div class="row no-gutters">
-
-          <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../static/images/accessible.gif');"></div>
-          <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2>Smooth mode of Communication</h2>
-            <p class="lead mb-0">Avoid unorganized and hard way of accessing Notices!</p>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6 text-white showcase-img" style="background-image: url('../../static/images/image00_grande.jpg');"></div>
-          <div class="col-lg-6 my-auto showcase-text">
-            <h2>Staleness and Non-Portability</h2>
-            <p class="lead mb-0">Newly improved way of viewing Notices! All Notices Accessible by Just Loging in!</p>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../static/images/laten.jpg');"></div>
-          <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2>Easy to Use</h2>
-            <p class="lead mb-0">Simply create an account, login and you are ready to view the content!</p>
-          </div>
-        </div>
-      </div>
-    </section> {% endcomment %}
-
-    <!-- Call to Action -->
-    {% comment %} <section class="call-to-action text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h2 class="mb-4">Ready to get started? <a href="#"><h2>Sign up now!</h2></a></h2>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-               <ul class="list-inline mb-2">
-              <li class="list-inline-item">
-                <a href="#">About Us</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Contact Us</a>
-              </li>
-
-            </ul>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section> {% endcomment %}
+ 
 
     {% endif %}
 

@@ -17,8 +17,7 @@ import xlrd
 def Signup(request):
 	return render(request, 'authenticate/divide.html')
 
-def home(request):
-	return render(request, 'authenticate/home.html', {})
+
 
 def homestaff(request):
 	return render(request, 'authenticate/home2.html', {})
@@ -228,9 +227,9 @@ def faculty_notice(request):
 	# control = False
 	today = date.today()
 	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
-	print(read)
+	# print(read)
 	count_unread = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_dean =True).filter(posted_by__faculty=request.user.faculty).order_by('-created_on').count()
-	print(count_unread)	
+	# print(count_unread)	
 	notices = Notices.read_by.through.objects.filter(user=request.user).filter(notices__due_date__gte=today).filter(notices__posted_by__is_dean =True).filter(notices__posted_by__faculty=request.user.faculty).order_by('-notices__created_on')
 	return render(request,'authenticate/facultynotice.html', {'notices':notices, 'count':count_unread})
 	
@@ -249,9 +248,9 @@ def faculty_notice_details(request, pk):
 def department_notice(request):
 	today = date.today()
 	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
-	print(read)
+	# print(read)
 	count_unread = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_cod =True).filter(posted_by__department=request.user.department).order_by('-created_on').count()
-	print(count_unread)	
+	# print(count_unread)	
 	notices = Notices.read_by.through.objects.filter(user=request.user).filter(notices__due_date__gte=today).filter(notices__posted_by__is_cod =True).filter(notices__posted_by__department=request.user.department).order_by('-notices__created_on')
 	return render(request,'authenticate/department_notice.html', {'notices':notices, 'count':count_unread})
 	
@@ -393,6 +392,24 @@ def handle_uploaaded_file(request, f):
 def excel(request):
 	if request.method == 'POST':
 		handle_uploaaded_file(request, request.FILES)
+
+def home(request):
+
+	today = date.today()
+	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
+	print(read)
+	faccount_unread = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_dean =True).filter(posted_by__faculty=request.user.faculty).order_by('-created_on').count()
+	print("faculty count"+str(faccount_unread))	
+	facnotices = Notices.read_by.through.objects.filter(user=request.user).filter(notices__due_date__gte=today).filter(notices__posted_by__is_dean =True).filter(notices__posted_by__faculty=request.user.faculty)
+
+	
+	read = Notices.read_by.through.objects.values_list('notices').filter(user=request.user)
+	print(read)
+	deptcount_unread = Notices.objects.exclude(id__in=read).filter(due_date__gte=today).filter(posted_by__is_cod =True).filter(posted_by__department=request.user.department).order_by('-created_on').count()
+	print(deptcount_unread)	
+	deptnotices = Notices.read_by.through.objects.filter(user=request.user).filter(notices__due_date__gte=today).filter(notices__posted_by__is_cod =True).filter(notices__posted_by__department=request.user.department)
+	return render(request,'authenticate/home.html', {'facnotices':facnotices, 'deptnotices':deptnotices,'faccount_unread':faccount_unread, 'deptcount_unread':deptcount_unread})
+	
 
 
 
