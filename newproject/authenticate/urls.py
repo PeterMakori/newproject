@@ -33,13 +33,17 @@ urlpatterns = [
     url(r'^department/notices/', views.department_notice, name="department_notices"),
     url(r'^department/unread/notices/', views.unread_department_notice, name="unread_department_notices"),
     path('department/notice/<pk>/',views.department_notice_details, name="read_department_notice"),
-    url(r'^search/notices/', views.Search_Notices, name="search"),
+    url(r'^search/faculty/notices/', views.Search_Notices, name="searchfac"),
+    url(r'^search/department/notices/', views.Search_Dept_Notices, name="searchdept"),
      url(r'^reports/notices/dean', views.Dean_Search_Notices, name="reports"),
     path('search/notice/<pk>/',views.search_notice_details, name="read_search_details"),
+    path('search/department/notice/<pk>/',views.search_dept_notice_details, name="read_searchdept_details"),
     path('reports/notices/cod', views.Cod_Search_Notices, name="codprintreports"),
     path('reports/suggestions/faculty', views.Dean_Search_Feedback, name="facultyfeedreports"),
     path('reports/suggestions/department', views.Cod_Print_Feedback, name="departmentfeedreports"),
-    # path('students_upload/', views.excel, name="add_students"),
+   
+
+    
 
     
 

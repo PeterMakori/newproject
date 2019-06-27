@@ -248,10 +248,10 @@
 							<a href="#pageSbmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-print fa-lg"></i> Generate Reports</a>
 							<ul class="collapse list-unstyled" id="pageSbmenu">
 									<li>
-											<a href="{% url 'reports' %}"> <i class="fas fa-print fa-lg"></i> Notices</a>
+											<a href="{% url 'reports' %}"> Notices</a>
 									</li>
 									<li>
-											<a href="{% url 'facultyfeedreports' %}"> <i class="fas fa-print fa-lg"></i> Suggetions</a>
+											<a href="{% url 'facultyfeedreports' %}"> Suggetions</a>
 									</li>
 									
 							</ul>
@@ -274,9 +274,7 @@
 									
 							</ul>
 					</li>
-					{% comment %} <li>
-							<a href="{% url 'add_students' %}"> Add Students</a>
-							</li> {% endcomment %}
+					
 									
 
 					
@@ -306,9 +304,24 @@
 							</ul>
 					</li>
 
+
+
+
 					<li>
-							<a href="{% url 'search' %}"> <i class="fas fa-search fa-lg"></i> Search Notices</a>
+							<a href="#pagebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-search fa-lg"></i> Search Notices</a>
+							<ul class="collapse list-unstyled" id="pagebmenu">
+									<li>
+											<a href="{% url 'searchfac' %}"> Faculty</a>
+									</li>
+									<li>
+											<a href="{% url 'searchdept' %}"> Department</a>
+									</li>
+									
+							</ul>
 					</li>
+
+
+					
 					<li>
 							<a href="{% url 'feedback' %}"> <i class="fas fa-inbox fa-lg"></i> Suggestion Box</a>
 					</li>
@@ -342,19 +355,7 @@
 
 <!--/. Sidebar navigation -->
 
-{% comment %}
-<div id="content">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
-                <span>Toggle Sidebar</span>
-            </button>
-
-        </div>
-    </nav>
-</div> {% endcomment %}
 
 
 	   {% endif %}
@@ -493,45 +494,15 @@
 									$( "#to1" ).datepicker({
 											dateFormat: "yy-mm-dd",
 											constrainInput: true,
+											minDate: 'now',
+											 
 									});
 								} );
 								</script>
 
-		 <script>
-				function isValidDate(from1, to1) {
-            var fromdate, todate, dt1, dt2, mon1, mon2, yr1, yr2, date1, date2;
-            var chkFrom = document.getElementById(from1);
-            var chkTo = document.getElementById(to1);
-            if (trim(document.getElementById(from1).value, '') == '') {
-                alert('From date should not be empty');
-                document.getElementById(from1).value = '';
-                document.getElementById(from1).focus();
-                return false;
-            }
-            else if (trim(document.getElementById(to1).value, '') == '') {
-                alert('To date should not be empty');
-                document.getElementById(to1).value = '';
-                document.getElementById(to1).focus();
-                return false;
-            }
-           
-                }
-             
-                    
+			
 
-					
-
-                    if (to1 <= from1) {
-                        alert("To date Should be greater than From date");
-                        document.getElementById(to1).value = '';
-                        document.getElementById(to1).focus();
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-</script>
+		
 
 								<script>
 								var faculties = ["Agriculture","Arts and Sciences","Commerce","Education and Community Studies","Engineering and Technology",

@@ -20,10 +20,10 @@
 <div class="card">
   <div class="card-header text-center">
 
-   Faculty of {{ search.posted_by.faculty }} Notice 
+   Department of {{ search.posted_by.department }} Notice 
   </div>
   <div class="card-body">
-    From Dean
+    From COD
     <hr>
     <h5 class="h5 mt-4"><strong> Date Posted</strong></h5>
     <p class="h6"> {{ search.created_on }}</p>
@@ -33,13 +33,11 @@
     <p class="h6"> {{ search.notice }}</p>
     <h5 class="h5 mt-4"><strong>Due Date</strong></h5>
     <p class="h6"> {{ search.due_date }}</p>
-    <br/>
+     <br/>
   </div>
-  
 
 </div>
 </div>
 
-<br/>
 </div>
 {% endblock %}

@@ -13,10 +13,10 @@
 {% block content %}
 
 
- <h4 class="text-center"><strong>Search Faculty Notices by Due Date</strong></h4>
+ <h4 class="text-center"><strong>Search Department Notices by Due Date</strong></h4>
 <div style="margin-left:390px;">
     <br>
-    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'searchfac' %}" method="get">
+    <form class="form-inline active-cyan-3 active-cyan-4" action="{% url 'searchdept' %}" method="get">
         
         <input class="form-control form-control-lg ml-3 w-15" type="text" id= "from1" value="2019-06-27" name="from" placeholder="From" autocomplete="off" readonly="readonly" required>
 
@@ -64,12 +64,12 @@
                       </tr>
                   </thead>
                     <tbody>
-            {% for notices in notices_available %}
+            {% for notic in notices_available %}
             <tr>
-                <td>{{ notices.topic }} </td>
-                <td>{{ notices.created_on }}</td>
-                <td> {{ notices.due_date }}</td>
-                <td><a href="{% url 'read_search_details' notices.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
+                <td>{{ notic.topic }} </td>
+                <td>{{ notic.created_on }}</td>
+                <td> {{ notic.due_date }}</td>
+                <td><a href="{% url 'read_searchdept_details' notic.id %}" class="btn btn-primary btn-sm">Read Details</a></td>
             </tr>
             {% endfor %}
   

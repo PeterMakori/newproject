@@ -305,6 +305,27 @@ def search_notice_details(request, pk):
 	search.read_by.add(request.user)
 	return render(request,'authenticate/search_noticed_details.html', {'search':search})
 
+def search_dept_notice_details(request, pk):
+	search = Notices.objects.get(pk=pk)
+	search.read_by.add(request.user)
+	return render(request,'authenticate/search_deptnoticed_details.html', {'search':search})
+
+
+def Search_Dept_Notices(request):
+	notices_from = request.GET.get('from')
+	notices_to = request.GET.get('to')
+	if notices_from == None or notices_to ==None:
+		notices_available = Notices.objects.filter(posted_by__is_cod =True).filter( posted_by__department=request.user.department).order_by('-created_on')[:3]
+
+	else:
+		notices_from = datetime.strptime(notices_from, "%Y-%m-%d").date()
+		notices_to = datetime.strptime(notices_to, "%Y-%m-%d").date()
+		
+		notices_available = Notices.objects.filter(due_date__gte=notices_from).filter(due_date__lte=notices_to).filter(posted_by__is_cod =True).filter( posted_by__department=request.user.department).order_by('-created_on')
+		
+	context = {'notices_available':notices_available}
+	return render(request, 'authenticate/searchdept.html', context)
+
 def Dean_Search_Notices(request):
 	notices_from = request.GET.get('from')
 	notices_to = request.GET.get('to')
