@@ -16,7 +16,7 @@
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-     min-height: 200%;   /*height of sidevar to edit */
+     min-height: 150%;   /*height of sidevar to edit */
     position: relative;
 }
 a[data-toggle="collapse"] {
