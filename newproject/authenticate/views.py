@@ -367,31 +367,67 @@ def Cod_Print_Feedback(request):
 		codfeeds_available = SendFeedback.objects.filter(sent_on__gte=codfeeds_from).filter(sent_on__lte=codfeeds_to).filter(to_department =True).filter( depart__department=request.user.department).order_by('-sent_on')
 	return render(request,'authenticate/reportfeeds_department.html', {'codfeeds_available':codfeeds_available} )
 
-def handle_uploaaded_file(request, f):
-	book = xlrd.open_workbook(file_read())
-	for sheet in book.sheets():
-		number_of_rows = sheet.number_of_rows
-		number_of_columns = sheet.number_of_columns
+# def handle_uploaaded_file(request, f):
+# 	book = xlrd.open_workbook(file_contents=f.read())
+# 	for sheet in book.sheets():
+# 		number_of_rows = sheet.number_of_rows
+# 		number_of_columns = sheet.number_of_columns
 
-		for row in range(1, number_of_rows):
-			department = (sheet.cell(row, 0).value)
-			registration_no = (sheet.cell(row, 0).value)
-			first_name = (sheet.cell(row, 0).value)
-			last_name = (sheet.cell(row, 0).value)
+# 		for row in range(1, number_of_rows):
+# 			password = (sheet.cell(row, 1).value)
+# 			username = (sheet.cell(row, 2).value)
+# 			first_name = (sheet.cell(row, 3).value)
+# 			last_name = (sheet.cell(row, 4).value)
+# 			email = (sheet.cell(row, 5).value)
+# 			is_student = (sheet.cell(row, 6).value)
+# 			department_id = (sheet.cell(row, 7).value)
+# 			faculty_id = (sheet.cell(row, 8).value)
 
-			user = User()
-			user.username = registration_no
-			user.password = make_password(registration_no, salt = None, hasher = 'default')
-			user.first_name = first_name
-			user.last_name = last_name
-			user.is_student = True
-			user.save()
 
-			department1 = Department.objects.get(department_name = department)
+	# 		user = User()
+	# 		user.username = username
+	# 		user.password = make_password(password, salt = None, hasher = 'default')
+	# 		user.first_name = first_name
+	# 		user.last_name = last_name
+	# 		user.email = email
+	# 		user.is_student = True
+	# 		user.department_id = department_id
+	# 		user.faculty_id = faculty_id
+	# 		user.save()
+		
+	# return redirect('')
+
+	
 			
-def excel(request):
-	if request.method == 'POST':
-		handle_uploaaded_file(request, request.FILES)
+
+
+
+# def UploadFile(request, f):
+#     book = xlrd.open_workbook(file_contents=f.read())
+#     for sheet in book.sheets():
+#         number_of_rows = sheet.nrows
+#         number_of_columns = sheet.ncols
+#         for row in range(1, number_of_rows):
+# 			# faculty_id = (sheet.)
+            # password = (sheet.cell(row, 1).value)
+            # username = (sheet.cell(row, 2).value)
+            # first_name = (sheet.cell(row, 3).value)
+            # last_name = (sheet.cell(row, 4).value)
+            # email = (sheet.cell(row, 5).value)
+            # is_student = (sheet.cell(row, 6).value)
+            # department_id = (sheet.cell(row, 7).value)
+
+# 			user = User()
+# 			user.
+			
+
+			
+# def excel(request):
+# 	if request.method == 'POST':
+# 		print('imeingia')
+# 		handle_uploaaded_file(request, request.FILES)
+# 	else:
+# 		return render(request, 'authenticate/add_students.html')
 
 def home(request):
 

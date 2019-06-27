@@ -1,0 +1,25 @@
+{% extends 'authenticate/base.html' %}
+
+{% block title %}
+<title>E-NoticeBoard</title>
+
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+	<form method="POST" action="{% url 'add_students' %}" enctype='multipart/form-data'>
+		{% csrf_token %}
+        <input type="file" name="f" required/>
+
+  
+          <input  type="submit" name="singlebutton"  value="Upload" class="btn btn-primary center-block">
+           
+      
+
+	</form>
+	
+
+{% endblock %}
