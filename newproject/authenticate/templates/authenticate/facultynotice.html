@@ -38,7 +38,9 @@
        <h5 class="card-title text-center text-info">You have {{count}} unread notices, please read them.</h5>
        
         {% else %}
-    <table class="table table-hover table-lg">
+    {% comment %} <table class="table table-hover table-lg table-responsive-md" id="feeds" width="100%" > {% endcomment %}
+    <table  id="faees" class="table table-responsive-md" cellspacing="0" width="100%">
+   
       <thead>
         <tr>
           <th>Topic</th>
@@ -84,4 +86,17 @@
 
 </div>
 <br/><br/>
+
+
+
+
+<script>
+ $(document).ready(function () {
+  $('#dtExample').DataTable({
+    "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+  });
+  $('.dataTables_length').addClass('bs-select');
+});
+
+</script>
 {% endblock content%}

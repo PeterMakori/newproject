@@ -41,7 +41,7 @@ urlpatterns = [
     path('reports/notices/cod', views.Cod_Search_Notices, name="codprintreports"),
     path('reports/suggestions/faculty', views.Dean_Search_Feedback, name="facultyfeedreports"),
     path('reports/suggestions/department', views.Cod_Print_Feedback, name="departmentfeedreports"),
-   
+    path('Cod/add/student', views.excel, name="addstudent"), 
 
     
 

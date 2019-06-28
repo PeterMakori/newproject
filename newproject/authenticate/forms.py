@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from authenticate.models import User
 from django import forms
 from .models import SendFeedback,Notices
-from django.forms import ModelForm,Textarea
+from django.forms import ModelForm,Textarea, TextInput
 
 class EditProfileForm(UserChangeForm):
     email = forms.EmailField(label="", help_text = '', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -116,6 +116,7 @@ class SendFeedbackForm(forms.ModelForm):
         fields = ('type', 'subject', 'message')
         widgets = {
             'message': Textarea(attrs={'class':'form-control','cols':4, 'rows':5}),
+            'type': TextInput(attrs={'pattern': '[A-Za-z ]{5,}', 'title': 'Numbers are not allowed. Must have 5 minimum characters '}),
         }
 
 class NoticeForm(forms.ModelForm):
@@ -124,4 +125,5 @@ class NoticeForm(forms.ModelForm):
         fields = ('topic','notice','due_date',)
         widgets = {
             'notice': Textarea(attrs={'class':'form-control','cols':12, 'rows':5}),
+             'topic': TextInput(attrs={'pattern': '[A-Za-z ]{5,}', 'title': 'Numbers are not allowed. Must have 5 minimum characters '}),
         }
